@@ -1,0 +1,225 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Interview Preparation Agent | College FAI Project</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header class="app-header">
+    <div class="container header-content">
+      <a href="/" class="brand-logo">
+        <div class="brand-icon-wrap">
+          <div class="brand-icon">🤖</div>
+          <span class="brand-pulse"></span>
+        </div>
+        <div>
+          <div class="brand-title">AI Interview Preparation Agent</div>
+          <div class="brand-tagline">
+            <span>Adaptive AI Technical Interview System</span>
+          </div>
+        </div>
+      </a>
+      <div class="header-badges">
+        <div class="live-indicator">
+          <span class="status-dot"></span>
+          <span>GEMINI AI ACTIVE</span>
+        </div>
+        <span class="live-indicator" style="border-color: rgba(99, 102, 241, 0.4); color: var(--primary-light);">
+          🎓 FAI Course Project
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content" style="flex: 1; padding: 36px 0 60px;">
+    <div class="container">
+
+      <!-- AI Agent Loop Circuit Ribbon -->
+      <div class="agent-circuit-banner">
+        <div class="circuit-header">
+          <span class="circuit-label">⚡ Autonomous AI Agent Architecture (Closed Feedback Loop)</span>
+          <span style="font-size: 0.72rem; color: var(--text-dim); font-family: 'JetBrains Mono', monospace;">STATE: IDLE / READY</span>
+        </div>
+        <div class="circuit-track">
+          <div class="node-chip active">
+            <span>👁️</span> <strong>OBSERVE</strong> (Profile & Answers)
+          </div>
+          <span class="node-arrow">➔</span>
+          <div class="node-chip active">
+            <span>🔍</span> <strong>ANALYZE</strong> (Gemini Evaluation)
+          </div>
+          <span class="node-arrow">➔</span>
+          <div class="node-chip active">
+            <span>⚙️</span> <strong>DECIDE</strong> (Difficulty & Weak Area)
+          </div>
+          <span class="node-arrow">➔</span>
+          <div class="node-chip active">
+            <span>⚡</span> <strong>ACT</strong> (Adaptive Question)
+          </div>
+          <span class="node-arrow">➔</span>
+          <div class="node-chip active">
+            <span>🔄</span> <strong>ADAPT</strong> (5-Question Cycle)
+          </div>
+        </div>
+      </div>
+
+      <!-- Flash Messages -->
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category if category != 'error' else 'warning' }}">
+              <span>⚠️ {{ message }}</span>
+            </div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      <!-- Hero Header -->
+      <div class="hero-wrap">
+        <div class="hero-pill">
+          <span>✨ Autonomous Interview Preparation Agent</span>
+        </div>
+        <h2>Master Your Technical Interviews with Adaptive AI</h2>
+        <p>Practice technical interviews with an adaptive AI interview agent that calibrates question difficulty and diagnoses your technical gaps in real time.</p>
+
+        <!-- Quick 1-Click Role Presets -->
+        <div class="presets-wrap">
+          <span class="preset-title">⚡ Quick 1-Click Setup:</span>
+          <button type="button" class="preset-btn" onclick="applyPreset('python')">
+            🐍 Python Developer
+          </button>
+          <button type="button" class="preset-btn" onclick="applyPreset('ai')">
+            🤖 AI / ML Engineer
+          </button>
+          <button type="button" class="preset-btn" onclick="applyPreset('fullstack')">
+            🌐 Full-Stack Dev
+          </button>
+          <button type="button" class="preset-btn" onclick="applyPreset('data')">
+            📊 Data Analyst
+          </button>
+          <button type="button" class="preset-btn" onclick="applyPreset('dsa')">
+            🎯 Campus Placements (DSA)
+          </button>
+        </div>
+      </div>
+
+      <!-- Student Profile Form Card -->
+      <div class="card">
+        <h3 class="card-title">
+          <span>Candidate Calibration & Interview Profile</span>
+        </h3>
+        <p class="card-subtitle">
+          Configure your technical background below. The AI Agent will use these details to initiate the mock interview and adapt questions as you respond.
+        </p>
+
+        <form action="/start-interview" method="POST">
+          <div class="form-grid">
+
+            <!-- Field 1: Student Name -->
+            <div class="form-group">
+              <label for="student_name" class="form-label">
+                <span>1. Student Name *</span>
+                <span class="form-hint">Used for report generation</span>
+              </label>
+              <input type="text" id="student_name" name="student_name" class="form-control" placeholder="e.g., Arun" value="Arun" required>
+            </div>
+
+            <!-- Field 2: Target Job Role -->
+            <div class="form-group">
+              <label for="job_role" class="form-label">
+                <span>2. Target Job Role *</span>
+                <span class="form-hint">Calibrates interview domain</span>
+              </label>
+              <input type="text" id="job_role" name="job_role" class="form-control" placeholder="e.g., Python Developer" value="Python Developer" required>
+            </div>
+
+            <!-- Field 3: Current Skills -->
+            <div class="form-group">
+              <label for="skills" class="form-label">
+                <span>3. Current Technical Skills *</span>
+                <span class="form-hint">Languages & frameworks</span>
+              </label>
+              <input type="text" id="skills" name="skills" class="form-control" placeholder="e.g., Python, C++, SQL" value="Python, C++, SQL" required>
+            </div>
+
+            <!-- Field 4: Weak Areas -->
+            <div class="form-group">
+              <label for="weak_areas" class="form-label">
+                <span>4. Initial Weak Areas *</span>
+                <span class="form-hint">Primary focus topics</span>
+              </label>
+              <input type="text" id="weak_areas" name="weak_areas" class="form-control" placeholder="e.g., OOP, DSA" value="OOP, DSA" required>
+            </div>
+
+            <!-- Field 5: Preparation Time -->
+            <div class="form-group form-group-full">
+              <label for="prep_time" class="form-label">
+                <span>5. Daily Preparation Time *</span>
+                <span class="form-hint">Shapes your custom 5-day study plan</span>
+              </label>
+              <input type="text" id="prep_time" name="prep_time" class="form-control" placeholder="e.g., 2 hours per day" value="2 hours per day" required>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-group form-group-full" style="margin-top: 14px;">
+              <button type="submit" class="btn btn-primary btn-lg btn-block">
+                Start AI Interview 🚀
+              </button>
+            </div>
+
+          </div>
+        </form>
+      </div>
+
+      <!-- Key Agent Features Matrix -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; margin-top: 24px;">
+        <div class="hud-tile" style="padding: 18px;">
+          <div class="hud-icon">🧠</div>
+          <div class="hud-data">
+            <span class="hud-label">Adaptive Engine</span>
+            <span style="font-size: 0.92rem; font-weight: 700; color: #fff;">Dynamic Difficulty Shift</span>
+            <span style="font-size: 0.78rem; color: var(--text-dim);">Adjusts from Easy ↔ Medium ↔ Hard</span>
+          </div>
+        </div>
+        <div class="hud-tile" style="padding: 18px;">
+          <div class="hud-icon">🎯</div>
+          <div class="hud-data">
+            <span class="hud-label">Target Diagnostics</span>
+            <span style="font-size: 0.92rem; font-weight: 700; color: #fff;">Weakness Remediation</span>
+            <span style="font-size: 0.78rem; color: var(--text-dim);">Follow-up questions probe detected gaps</span>
+          </div>
+        </div>
+        <div class="hud-tile" style="padding: 18px;">
+          <div class="hud-icon">📊</div>
+          <div class="hud-data">
+            <span class="hud-label">Structured JSON</span>
+            <span style="font-size: 0.92rem; font-weight: 700; color: #fff;">Granular AI Feedback</span>
+            <span style="font-size: 0.78rem; color: var(--text-dim);">Score /10, strengths, and model answers</span>
+          </div>
+        </div>
+        <div class="hud-tile" style="padding: 18px;">
+          <div class="hud-icon">📅</div>
+          <div class="hud-data">
+            <span class="hud-label">Preparation Plan</span>
+            <span style="font-size: 0.92rem; font-weight: 700; color: #fff;">5-Day Custom Roadmap</span>
+            <span style="font-size: 0.78rem; color: var(--text-dim);">Generated specifically for your weaknesses</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="app-footer">
+    <div class="container">
+      <p>Fundamentals of Artificial Intelligence (FAI) College Project • Adaptive AI Agent powered by Google Gemini</p>
+    </div>
+  </footer>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

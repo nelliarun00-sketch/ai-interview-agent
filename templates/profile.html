@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+{% block title %}Student Profile | AI Career Mentor{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 860px;">
+
+  <!-- Page Header -->
+  <div style="margin-bottom: 28px;">
+    <span style="font-size: 0.78rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.08em; display: block; margin-bottom: 4px;">
+      STUDENT PROFILE &amp; SETTINGS
+    </span>
+    <h1 style="font-size: 2rem; font-weight: 800; color: var(--text-main); margin-bottom: 6px;">
+      {{ student.profile.name }}
+    </h1>
+    <p style="color: var(--text-muted); font-size: 0.95rem;">
+      Manage your educational profile, target career tracks, daily commitment, and security settings.
+    </p>
+  </div>
+
+  <!-- User Account Card -->
+  <div class="card" style="padding: 24px; margin-bottom: 24px; border-left: 4px solid var(--primary);">
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <div style="width: 54px; height: 54px; border-radius: 50%; background: var(--accent-gradient); color: #FFF; font-size: 1.5rem; font-weight: 800; display: flex; align-items: center; justify-content: center;">
+          {{ student.profile.name[:1] }}
+        </div>
+        <div>
+          <h2 style="font-size: 1.3rem; font-weight: 700; color: var(--text-main); margin: 0 0 2px;">
+            {{ student.profile.name }}
+          </h2>
+          <div style="font-size: 0.88rem; color: var(--text-muted);">
+            {{ user.email if user else 'student@example.com' }} &bull; Target: <strong>{{ student.goal.career_title }}</strong>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 8px;">
+        <a href="{{ url_for('main.export_data') }}" class="btn btn-sm btn-outline">
+          📥 Export JSON Data
+        </a>
+      </div>
+    </div>
+
+    <!-- 3 Quick Stats -->
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border);">
+      <div style="text-align: center;">
+        <span style="font-size: 0.76rem; color: var(--text-muted); text-transform: uppercase;">Mock Interviews</span>
+        <div style="font-size: 1.25rem; font-weight: 800; color: var(--text-main);">{{ interviews_count }}</div>
+      </div>
+      <div style="text-align: center;">
+        <span style="font-size: 0.76rem; color: var(--text-muted); text-transform: uppercase;">Completed Learning</span>
+        <div style="font-size: 1.25rem; font-weight: 800; color: var(--success);">{{ resources_count }}</div>
+      </div>
+      <div style="text-align: center;">
+        <span style="font-size: 0.76rem; color: var(--text-muted); text-transform: uppercase;">Saved Bookmarks</span>
+        <div style="font-size: 1.25rem; font-weight: 800; color: var(--primary);">{{ bookmarks_count }}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Form 1: Edit Profile -->
+  <div class="card" style="margin-bottom: 24px;">
+    <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--text-main); margin-bottom: 18px;">
+      Edit Profile &amp; Preferences
+    </h3>
+
+    <form method="POST" action="{{ url_for('profile.view_profile') }}">
+      <input type="hidden" name="action" value="update_profile">
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+        <div class="form-group">
+          <label class="form-label" for="name">Full Name</label>
+          <input type="text" id="name" name="name" class="form-control" value="{{ student.profile.name }}" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="education">Degree</label>
+          <input type="text" id="education" name="education" class="form-control" value="{{ student.profile.education }}" required>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+        <div class="form-group">
+          <label class="form-label" for="specialization">Specialization / Department</label>
+          <input type="text" id="specialization" name="specialization" class="form-control" value="{{ student.profile.specialization }}" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="graduation_status">Graduation Status</label>
+          <input type="text" id="graduation_status" name="graduation_status" class="form-control" value="{{ student.profile.graduation_status }}" required>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+        <div class="form-group">
+          <label class="form-label" for="career_id">Target Career Track</label>
+          <select id="career_id" name="career_id" class="form-control" required>
+            {% for c_id, c in careers.items() %}
+              <option value="{{ c_id }}" {% if student.goal.career_id == c_id %}selected{% endif %}>
+                {{ c.name }} ({{ c.group }})
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="hours_per_day">Daily Study Commitment (Hours)</label>
+          <input type="number" step="0.5" min="0.5" max="8.0" id="hours_per_day" name="hours_per_day" class="form-control" value="{{ student.profile.hours_per_day }}" required>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+        <div class="form-group">
+          <label class="form-label" for="experience_level">Experience Level</label>
+          <select id="experience_level" name="experience_level" class="form-control">
+            <option value="Beginner" {% if student.profile.experience_level == 'Beginner' %}selected{% endif %}>Beginner</option>
+            <option value="Intermediate" {% if student.profile.experience_level == 'Intermediate' %}selected{% endif %}>Intermediate</option>
+            <option value="Advanced" {% if student.profile.experience_level == 'Advanced' %}selected{% endif %}>Advanced</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="weak_areas">Weak Areas (Comma-separated)</label>
+          <input type="text" id="weak_areas" name="weak_areas" class="form-control" value="{{ student.profile.self_rated_skills|join(', ') }}" placeholder="DSA, System Design, Concurrency">
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary" style="font-weight: 700;">
+        Save Profile Changes
+      </button>
+    </form>
+  </div>
+
+  <!-- Form 2: Change Password -->
+  <div class="card">
+    <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--text-main); margin-bottom: 18px;">
+      Account Security &amp; Password
+    </h3>
+
+    <form method="POST" action="{{ url_for('profile.view_profile') }}">
+      <input type="hidden" name="action" value="change_password">
+
+      <div class="form-group">
+        <label class="form-label" for="current_password">Current Password</label>
+        <input type="password" id="current_password" name="current_password" class="form-control" placeholder="••••••••" required>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+        <div class="form-group">
+          <label class="form-label" for="new_password">New Password</label>
+          <input type="password" id="new_password" name="new_password" class="form-control" placeholder="Minimum 6 characters" minlength="6" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="confirm_password">Confirm New Password</label>
+          <input type="password" id="confirm_password" name="confirm_password" class="form-control" placeholder="Re-type new password" minlength="6" required>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-outline" style="font-weight: 700;">
+        Update Password
+      </button>
+    </form>
+  </div>
+
+</div>
+{% endblock %}

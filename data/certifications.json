@@ -1,0 +1,84 @@
+[
+  {
+    "id": "cert_01",
+    "title": "AWS Certified Solutions Architect - Associate",
+    "issuer": "Amazon Web Services",
+    "kind": "official_certification",
+    "career_ids": [
+      "cloud_devops_engineer",
+      "software_engineer"
+    ],
+    "difficulty": "Medium",
+    "prerequisites": [
+      "cloud",
+      "networks"
+    ],
+    "url": "https://aws.amazon.com/certification/certified-solutions-architect-associate/",
+    "description": "Validates ability to design secure, robust, and cost-effective cloud architectures."
+  },
+  {
+    "id": "cert_02",
+    "title": "DeepLearning.AI: Deep Learning Specialization",
+    "issuer": "DeepLearning.AI / Coursera",
+    "kind": "learning_course",
+    "career_ids": [
+      "ai_ml_engineer",
+      "data_scientist"
+    ],
+    "difficulty": "Medium",
+    "prerequisites": [
+      "python",
+      "statistics",
+      "machine_learning"
+    ],
+    "url": "https://www.coursera.org/specializations/deep-learning",
+    "description": "Comprehensive 5-course sequence taught by Andrew Ng covering neural networks and sequence models."
+  },
+  {
+    "id": "cert_03",
+    "title": "Certified Kubernetes Administrator (CKA)",
+    "issuer": "Cloud Native Computing Foundation (CNCF)",
+    "kind": "official_certification",
+    "career_ids": [
+      "cloud_devops_engineer"
+    ],
+    "difficulty": "Hard",
+    "prerequisites": [
+      "devops",
+      "os"
+    ],
+    "url": "https://www.cncf.io/certification/cka/",
+    "description": "Performance-based exam verifying hands-on skill to configure and troubleshoot Kubernetes clusters."
+  },
+  {
+    "id": "cert_04",
+    "title": "CompTIA Security+ (SY0-701)",
+    "issuer": "CompTIA",
+    "kind": "official_certification",
+    "career_ids": [
+      "cybersecurity_analyst"
+    ],
+    "difficulty": "Medium",
+    "prerequisites": [
+      "networks",
+      "cybersecurity"
+    ],
+    "url": "https://www.comptia.org/certifications/security",
+    "description": "Global benchmark certification establishing foundational cybersecurity skills."
+  },
+  {
+    "id": "cert_05",
+    "title": "LeetCode 75 Study Plan & Practice Badges",
+    "issuer": "LeetCode",
+    "kind": "practice_resource",
+    "career_ids": [
+      "software_engineer"
+    ],
+    "difficulty": "Medium",
+    "prerequisites": [
+      "dsa"
+    ],
+    "url": "https://leetcode.com/studyplan/leetcode-75/",
+    "description": "Essential practice roadmap covering the 75 most frequent interview algorithms."
+  }
+]

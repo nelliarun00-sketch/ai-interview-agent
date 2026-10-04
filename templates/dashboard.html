@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+{% block title %}Dashboard | AI Career Mentor{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 960px;">
+
+  <!-- Greeting Banner -->
+  <div style="margin-bottom: 24px;">
+    <h1 style="font-size: 1.85rem; font-weight: 800; color: var(--text-main); margin-bottom: 4px;">
+      Good morning, {{ student.profile.name.split()[0] }} 👋
+    </h1>
+    <p style="color: var(--text-muted); font-size: 0.95rem;">
+      Let's continue your journey toward interview readiness for <strong style="color: var(--text-main);">{{ student.goal.career_title }}</strong>.
+    </p>
+  </div>
+
+  <!-- Main Card: CAREER READINESS -->
+  <div class="readiness-hero-card">
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+      <div>
+        <span style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.9; display: block; margin-bottom: 6px;">
+          CAREER READINESS
+        </span>
+        <div style="font-size: 3.5rem; font-weight: 900; line-height: 1; margin-bottom: 8px;">
+          {{ readiness.overall_readiness }}%
+        </div>
+        <div style="display: inline-flex; align-items: center; gap: 6px; background: rgba(255, 255, 255, 0.2); padding: 4px 12px; border-radius: var(--radius-pill); font-size: 0.82rem; font-weight: 600;">
+          <span>🎯</span> {{ readiness.badge }}
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 10px; align-items: flex-start;">
+        <a href="{{ url_for('interview.hub') }}" class="btn btn-white btn-lg" style="font-size: 1rem;">
+          Continue Preparation &rarr;
+        </a>
+        <span style="font-size: 0.78rem; opacity: 0.85;">Based on Bayesian skill mastery &amp; interview evaluations</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3 Summary Metrics Below Readiness -->
+  <div class="stats-grid-3">
+    <div class="stat-card">
+      <div class="stat-card-label">Technical Skills</div>
+      <div class="stat-card-value" style="color: var(--primary);">
+        {{ tech_score }}%
+      </div>
+      <div class="stat-card-desc">Weighted knowledge graph mastery</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-card-label">Interview Practice</div>
+      <div class="stat-card-value" style="color: var(--secondary);">
+        {{ interviews_count }} Sessions
+      </div>
+      <div class="stat-card-desc">Adaptive evaluations completed</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-card-label">Learning Progress</div>
+      <div class="stat-card-value" style="color: var(--success);">
+        {{ learning_score }}%
+      </div>
+      <div class="stat-card-desc">Verified syllabus &amp; practice complete</div>
+    </div>
+  </div>
+
+  <!-- Today's AI Plan & One Focused AI Recommendation (2-Column Grid) -->
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 32px;">
+
+    <!-- Left: Today's AI Plan -->
+    <div class="card">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+        <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--text-main); margin: 0;">
+          Today's AI Plan
+        </h3>
+        <span class="badge badge-primary">Day 1</span>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        {% for task in dashboard_tasks %}
+          <div style="display: flex; align-items: center; gap: 12px; padding: 10px 12px; background: var(--bg-subtle); border: 1px solid var(--border); border-radius: var(--radius-sm);">
+            <input type="checkbox" id="{{ task.id }}" {% if task.completed %}checked{% endif %} onchange="toggleTaskCheck('{{ task.id }}', this.checked)" style="width: 18px; height: 18px; accent-color: var(--primary); cursor: pointer;">
+            <label for="{{ task.id }}" style="font-size: 0.88rem; color: var(--text-main); font-weight: 500; cursor: pointer; flex: 1; {% if task.completed %}text-decoration: line-through; color: var(--text-muted);{% endif %}">
+              {{ task.title }}
+            </label>
+          </div>
+        {% endfor %}
+      </div>
+      <div style="margin-top: 14px; text-align: right;">
+        <a href="{{ url_for('planner.view_plan') }}" style="font-size: 0.82rem; font-weight: 600; color: var(--primary);">View full 5-day schedule &rarr;</a>
+      </div>
+    </div>
+
+    <!-- Right: ONE Focused AI Recommendation -->
+    <div class="card" style="border-top: 4px solid var(--primary); display: flex; flex-direction: column; justify-content: space-between;">
+      <div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <h3 style="font-size: 1.1rem; font-weight: 700; color: var(--text-main); margin: 0;">
+            AI Recommendation
+          </h3>
+          <span class="badge badge-warning">High Priority</span>
+        </div>
+
+        <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; margin-bottom: 14px;">
+          Your <strong>{{ primary_gap_name }}</strong> performance is currently below your target benchmark.
+        </p>
+
+        <div style="background: var(--bg-subtle); border-left: 3px solid var(--primary); padding: 12px 14px; border-radius: var(--radius-xs); margin-bottom: 20px;">
+          <span style="font-size: 0.76rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; display: block; margin-bottom: 2px;">
+            Recommended:
+          </span>
+          <strong style="color: var(--text-main); font-size: 0.92rem; display: block;">
+            {% if top_rec %}{{ top_rec.title }}{% else %}Practice Arrays, Linked Lists &amp; Problem Solving{% endif %}
+          </strong>
+          <span style="font-size: 0.78rem; color: var(--text-dim);">
+            {% if top_rec %}{{ top_rec.author_or_platform }} &bull; {{ top_rec.level|title }} &bull; {{ top_rec.cost|title }}{% else %}Core curriculum prerequisite{% endif %}
+          </span>
+        </div>
+      </div>
+
+      <div>
+        {% if top_rec %}
+          <a href="{{ top_rec.url }}" target="_blank" rel="noopener" class="btn btn-primary" style="width: 100%; font-weight: 700;">
+            Start Recommended Practice &rarr;
+          </a>
+        {% else %}
+          <a href="{{ url_for('resources.library') }}" class="btn btn-primary" style="width: 100%; font-weight: 700;">
+            Start Recommended Practice &rarr;
+          </a>
+        {% endif %}
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Discrete FAI Explainability Footer Trigger -->
+  <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 0.85rem;">
+    <div style="color: var(--text-muted);">
+      🤖 <strong>AI Explainability:</strong> Want to see Gemini's step-by-step reasoning &amp; knowledge tracing?
+    </div>
+    <button onclick="openTraceModal()" class="btn btn-sm btn-outline">
+      View AI Trace
+    </button>
+  </div>
+
+</div>
+
+<script>
+  function toggleTaskCheck(taskId, checked) {
+    const label = document.querySelector(`label[for="${taskId}"]`);
+    if (label) {
+      label.style.textDecoration = checked ? 'line-through' : 'none';
+      label.style.color = checked ? 'var(--text-muted)' : 'var(--text-main)';
+    }
+    const formData = new FormData();
+    formData.append('completed', checked ? 'true' : 'false');
+    fetch(`/planner/toggle-task/${taskId}`, {
+      method: 'POST',
+      body: formData
+    }).catch(e => console.log(e));
+  }
+</script>
+{% endblock %}

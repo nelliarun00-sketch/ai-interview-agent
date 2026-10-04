@@ -1,0 +1,200 @@
+{% extends "base.html" %}
+{% block title %}Career Strategy | AI Career Mentor{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 980px;">
+
+  <!-- Header -->
+  <div style="margin-bottom: 28px;">
+    <span style="font-size: 0.78rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.08em; display: block; margin-bottom: 4px;">
+      CAREER STRATEGY &amp; ROADMAP
+    </span>
+    <h1 style="font-size: 2rem; font-weight: 800; color: var(--text-main); margin-bottom: 6px;">
+      Target: {{ student.goal.career_title }}
+    </h1>
+    <p style="color: var(--text-muted); font-size: 0.95rem;">
+      Canonical skill gap breakdown, multi-phase curriculum roadmap, portfolio projects, and AI Job Description matching.
+    </p>
+  </div>
+
+  <!-- Top Hero: Career Readiness & Target Role Overview -->
+  <div class="card" style="padding: 24px; margin-bottom: 24px; border-top: 4px solid var(--primary);">
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+      <div>
+        <span style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Current Track</span>
+        <h2 style="font-size: 1.4rem; font-weight: 800; color: var(--text-main); margin: 2px 0;">
+          {{ student.goal.career_title }}
+        </h2>
+        <span style="font-size: 0.85rem; color: var(--text-dim);">Career Group: {{ student.goal.career_group }}</span>
+      </div>
+
+      <div style="display: flex; gap: 10px; align-items: center;">
+        <div style="text-align: right;">
+          <div style="font-size: 1.8rem; font-weight: 900; color: var(--primary); line-height: 1;">
+            {{ readiness.overall_readiness }}%
+          </div>
+          <span style="font-size: 0.78rem; color: var(--text-muted);">Readiness Index</span>
+        </div>
+        <a href="{{ url_for('resume.resume_home') }}" class="btn btn-outline" style="font-size: 0.88rem;">
+          📄 Resume Analyzer &rarr;
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1. JOB DESCRIPTION MATCHER -->
+  <div class="card" style="margin-bottom: 24px; border-left: 4px solid var(--secondary);">
+    <div style="margin-bottom: 16px;">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span style="font-size: 1.3rem;">🎯</span>
+        <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--text-main); margin: 0;">
+          AI Job Description Matcher
+        </h3>
+      </div>
+      <p style="font-size: 0.86rem; color: var(--text-muted); margin-top: 4px;">
+        Paste any campus or off-campus job description. Gemini AI compares requirements against your verified skills and surfaces missing qualifications.
+      </p>
+    </div>
+
+    <form action="{{ url_for('career.match_job_description') }}" method="POST">
+      <div class="form-group">
+        <label class="form-label" for="job_title">Job Title / Role</label>
+        <input type="text" id="job_title" name="job_title" class="form-control" placeholder="e.g. Associate Software Engineer - Backend" value="{{ student.goal.career_title }}" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="job_description">Paste Job Description</label>
+        <textarea id="job_description" name="job_description" rows="4" class="form-control" placeholder="Paste the JD text (responsibilities, required qualifications, technologies, etc.)..." required></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary" style="font-weight: 700;">
+        Compare My Profile &amp; Match &rarr;
+      </button>
+    </form>
+
+    {% if job_matches %}
+      <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border);">
+        <span style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Previous Matches</span>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px;">
+          {% for jm in job_matches[:3] %}
+            <span class="badge badge-primary">
+              {{ jm.job_title }}: {{ jm.match_percent }}% Match
+            </span>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+  </div>
+
+  <!-- 2. SKILL GAP ANALYSIS -->
+  <div class="card" style="margin-bottom: 24px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px;">
+      <div>
+        <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--text-main); margin: 0 0 2px;">
+          Skill Gap Analysis vs. Industry Benchmark
+        </h3>
+        <p style="font-size: 0.84rem; color: var(--text-muted); margin: 0;">Calculated deterministically: Gap = Required Benchmark &minus; Current Latent Mastery</p>
+      </div>
+      <span class="badge badge-warning">{{ gaps|length }} Gaps Identified</span>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 14px;">
+      {% for g in gaps[:6] %}
+        <div style="background: var(--bg-subtle); padding: 12px 16px; border-radius: var(--radius-sm); border: 1px solid var(--border);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+            <div>
+              <strong style="color: var(--text-main); font-size: 0.92rem;">{{ g.name }}</strong>
+              <span style="font-size: 0.78rem; color: var(--text-dim); margin-left: 8px;">Required: {{ (g.required * 100)|int }}% &bull; Current: {{ (g.current * 100)|int }}%</span>
+            </div>
+            <span class="badge badge-error" style="font-size: 0.76rem;">Gap: {{ (g.gap * 100)|int }}%</span>
+          </div>
+
+          <div class="progress-bar-wrap" style="height: 8px;">
+            <div class="progress-bar-fill fill-error" style="width: {{ (g.gap * 100)|int }}%;"></div>
+          </div>
+        </div>
+      {% endfor %}
+      {% if not gaps %}
+        <div style="text-align: center; color: var(--success); padding: 20px;">
+          🎉 Outstanding! All target skills meet or exceed the career benchmarks.
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- 3. CAREER ROADMAP PHASES -->
+  <div class="card" style="margin-bottom: 24px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px;">
+      <div>
+        <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--text-main); margin: 0 0 2px;">
+          Personalized Career Roadmap
+        </h3>
+        <p style="font-size: 0.84rem; color: var(--text-muted); margin: 0;">Multi-phase structured learning path based on your commitment ({{ student.profile.hours_per_day }}h/day)</p>
+      </div>
+      <a href="{{ url_for('roadmap.view_roadmap') }}" class="btn btn-sm btn-outline">Full Interactive View &rarr;</a>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 16px;">
+      {% for phase in roadmap.phases %}
+        <div style="border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 16px; background: var(--bg-surface);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span class="badge badge-primary">Phase {{ phase.phase_number }}</span>
+              <strong style="color: var(--text-main); font-size: 1rem;">{{ phase.phase_title }}</strong>
+            </div>
+            <span style="font-size: 0.8rem; color: var(--text-muted);">~{{ phase.estimated_days }} Days ({{ phase.estimated_hours }}h)</span>
+          </div>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 10px;">{{ phase.description }}</p>
+          <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+            {% for s in phase.skills %}
+              <span class="badge" style="background: var(--bg-subtle); color: var(--text-main); border: 1px solid var(--border);">
+                {{ s.name }}
+              </span>
+            {% endfor %}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- 4. RECOMMENDED PROJECTS & CERTIFICATIONS -->
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+    <!-- Projects -->
+    <div class="card">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+        <h4 style="font-size: 1.05rem; font-weight: 700; color: var(--text-main); margin: 0;">
+          Portfolio Projects
+        </h4>
+        <a href="{{ url_for('projects_certs.view_projects') }}" style="font-size: 0.8rem; color: var(--primary);">View all &rarr;</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        {% for p in projects[:2] %}
+          <div style="background: var(--bg-subtle); padding: 12px; border-radius: var(--radius-xs); border: 1px solid var(--border);">
+            <strong style="color: var(--text-main); font-size: 0.88rem; display: block;">{{ p.title }}</strong>
+            <span style="font-size: 0.78rem; color: var(--text-dim);">Level: {{ p.difficulty|title }} &bull; ~{{ p.estimated_hours }}h</span>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Certifications -->
+    <div class="card">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+        <h4 style="font-size: 1.05rem; font-weight: 700; color: var(--text-main); margin: 0;">
+          Curated Certifications
+        </h4>
+        <a href="{{ url_for('projects_certs.view_certifications') }}" style="font-size: 0.8rem; color: var(--primary);">View all &rarr;</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        {% for c in certifications[:2] %}
+          <div style="background: var(--bg-subtle); padding: 12px; border-radius: var(--radius-xs); border: 1px solid var(--border);">
+            <strong style="color: var(--text-main); font-size: 0.88rem; display: block;">{{ c.name }}</strong>
+            <span style="font-size: 0.78rem; color: var(--text-dim);">Provider: {{ c.provider }} &bull; {{ c.kind|replace('_', ' ')|title }}</span>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

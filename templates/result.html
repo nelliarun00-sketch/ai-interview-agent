@@ -1,0 +1,250 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interview Completed | Evaluation Diagnostic & Preparation Plan</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header class="app-header">
+    <div class="container header-content">
+      <a href="/" class="brand-logo">
+        <div class="brand-icon-wrap">
+          <div class="brand-icon">🎉</div>
+          <span class="brand-pulse"></span>
+        </div>
+        <div>
+          <div class="brand-title">AI Interview Preparation Agent</div>
+          <div class="brand-tagline">
+            <span>Interview Completed • Performance Diagnostics</span>
+          </div>
+        </div>
+      </a>
+      <div class="header-badges">
+        <span class="live-indicator">👤 {{ student_name }}</span>
+        <a href="/reset" class="btn btn-primary" style="padding: 6px 16px; font-size: 0.82rem;">
+          Start New Interview 🔄
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content" style="flex: 1; padding: 32px 0 60px;">
+    <div class="container">
+
+      <!-- Completion Hero Banner -->
+      <div class="hero-wrap" style="padding: 10px 0 28px;">
+        <div class="hero-pill" style="background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.4); color: var(--success);">
+          <span>✅ Technical Interview Session Completed</span>
+        </div>
+        <h2 style="font-size: 2.6rem;">Interview Evaluation & Preparation Plan</h2>
+        <p>
+          Candidate: <strong>{{ student_name }}</strong> • Target Role: <strong>{{ job_role }}</strong> • Daily Prep Time: <strong>{{ prep_time }}</strong>
+        </p>
+      </div>
+
+      <!-- Executive KPI Matrix -->
+      <div class="results-kpi-grid">
+        <div class="kpi-tile">
+          <div class="kpi-label">Questions Evaluated</div>
+          <div class="kpi-value">{{ total_questions }}</div>
+        </div>
+
+        <div class="kpi-tile">
+          <div class="kpi-label">Cumulative Score</div>
+          <div class="kpi-value" style="color: var(--primary-light);">
+            {{ total_score }} <span style="font-size: 1.1rem; color: var(--text-dim);">/ {{ total_possible }}</span>
+          </div>
+        </div>
+
+        <div class="kpi-tile">
+          <div class="kpi-label">Average Score</div>
+          <div class="kpi-value" style="color: {% if avg_score >= 8 %}var(--success){% elif avg_score >= 5 %}var(--secondary){% else %}var(--danger){% endif %};">
+            {{ avg_score }} <span style="font-size: 1.1rem; color: var(--text-dim);">/ 10</span>
+          </div>
+        </div>
+
+        <div class="kpi-tile">
+          <div class="kpi-label">Placement Readiness</div>
+          <div class="kpi-value" style="font-size: 1.6rem; color: #ffffff;">
+            <span class="difficulty-pill {% if performance_badge == 'Excellent' %}easy{% elif performance_badge == 'Good' %}medium{% else %}hard{% endif %}" style="font-size: 1rem; padding: 6px 16px;">
+              {{ performance_badge }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mentor Assessment Callout -->
+      <div class="alert alert-info" style="margin-bottom: 28px;">
+        <span>💡 <strong>Executive Evaluation Verdict:</strong> {{ performance_message }}</span>
+      </div>
+
+      <!-- Diagnostic Grid: Strengths vs Weaknesses -->
+      <div class="form-grid" style="margin-bottom: 28px;">
+
+        <!-- Confirmed Strengths -->
+        <div class="card" style="margin-bottom: 0; background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.8) 100%); border-color: rgba(16, 185, 129, 0.3);">
+          <div class="eval-box-header" style="color: var(--success); font-size: 1.1rem;">
+            <span>🌟 Confirmed Technical Strengths</span>
+          </div>
+          {% if strong_areas %}
+            <ul style="padding-left: 20px; font-size: 0.92rem; color: #e2e8f0; line-height: 1.8; margin-top: 10px;">
+              {% for strength in strong_areas %}
+                <li>{{ strength }}</li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 10px;">Good foundational answers demonstrated throughout the session.</p>
+          {% endif %}
+        </div>
+
+        <!-- Areas for Remediation -->
+        <div class="card" style="margin-bottom: 0; background: linear-gradient(135deg, rgba(244, 63, 94, 0.08) 0%, rgba(15, 23, 42, 0.8) 100%); border-color: rgba(244, 63, 94, 0.3);">
+          <div class="eval-box-header" style="color: var(--danger); font-size: 1.1rem;">
+            <span>⚠️ High-Priority Weak Areas & Study Topics</span>
+          </div>
+          {% if weak_areas %}
+            <ul style="padding-left: 20px; font-size: 0.92rem; color: #e2e8f0; line-height: 1.8; margin-top: 10px;">
+              {% for area in weak_areas %}
+                <li>{{ area }}</li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 10px;">No critical technical deficiencies flagged.</p>
+          {% endif %}
+        </div>
+
+      </div>
+
+      <!-- Personalized 5-Day Preparation Roadmap -->
+      <div class="card" style="padding: 32px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 8px;">
+          <h3 class="card-title" style="margin-bottom: 0;">
+            <span>📅 5-Day Personalized Preparation Plan</span>
+          </h3>
+          <button
+            type="button"
+            class="btn-tool"
+            onclick="copyTextToClipboard(document.getElementById('plan-container-text').innerText, this)"
+          >
+            📋 Copy 5-Day Plan
+          </button>
+        </div>
+        <p class="card-subtitle">
+          Dynamically synthesized by Gemini AI to target your weak technical areas based on your daily schedule of <strong>{{ prep_time }}</strong>.
+        </p>
+
+        <div class="plan-grid" id="plan-container-text">
+          {% for day_item in prep_plan.plan %}
+            <div class="plan-card">
+              <div class="day-badge-col">
+                <span class="day-tag">{{ day_item.day }}</span>
+              </div>
+              <div class="plan-body" style="flex: 1;">
+                <h4>{{ day_item.title }}</h4>
+                <p><strong>Core Focus:</strong> {{ day_item.focus }}</p>
+                <div class="plan-task-pill">
+                  <span>⚡ Actionable Exercise:</span> {{ day_item.task }}
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+
+        {% if prep_plan.overall_advice %}
+          <div class="adaptation-ribbon" style="margin-top: 24px; margin-bottom: 0;">
+            <div class="ribbon-icon">🎯</div>
+            <div class="ribbon-content">
+              <h4>AI Mentor Strategic Career Advice</h4>
+              <p style="line-height: 1.6;">{{ prep_plan.overall_advice }}</p>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+
+      <!-- Question-by-Question Deep Dive -->
+      <div class="card" style="padding: 32px;">
+        <h3 class="card-title">
+          <span>📝 Question-by-Question Diagnostic Breakdown</span>
+        </h3>
+        <p class="card-subtitle">
+          Review every technical question, your submitted response, the score awarded, and the model answer.
+        </p>
+
+        {% for item in history %}
+          <details class="breakdown-item" {% if loop.first %}open{% endif %}>
+            <summary>
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <span class="difficulty-pill {{ item.difficulty|lower }}" style="font-size: 0.75rem;">
+                  Q{{ item.question_number }}
+                </span>
+                <span>{{ item.question[:75] }}{% if item.question|length > 75 %}...{% endif %}</span>
+              </div>
+              <div>
+                <span class="difficulty-pill {% if item.score >= 8 %}easy{% elif item.score >= 5 %}medium{% else %}hard{% endif %}">
+                  Score: {{ item.score }} / 10
+                </span>
+              </div>
+            </summary>
+
+            <div class="breakdown-body">
+              <p style="margin-bottom: 12px; color: #ffffff;">
+                <strong>Full Technical Question:</strong><br>
+                {{ item.question }}
+              </p>
+
+              <div style="background: rgba(10, 14, 23, 0.7); border-left: 3px solid var(--border-card); padding: 14px 18px; border-radius: 6px; margin-bottom: 16px;">
+                <strong style="color: var(--accent-cyan); font-size: 0.85rem;">YOUR SUBMITTED ANSWER:</strong><br>
+                <span style="color: #cbd5e1; font-style: italic; font-size: 0.95rem;">{{ item.answer }}</span>
+              </div>
+
+              <div class="eval-grid" style="margin-bottom: 14px;">
+                <div class="eval-box strengths" style="padding: 14px;">
+                  <strong style="color: var(--success); font-size: 0.85rem;">STRENGTHS:</strong>
+                  <p style="margin-top: 4px; font-size: 0.88rem;">{{ item.evaluation.strengths }}</p>
+                </div>
+                <div class="eval-box improvements" style="padding: 14px;">
+                  <strong style="color: var(--warning); font-size: 0.85rem;">IMPROVEMENTS:</strong>
+                  <p style="margin-top: 4px; font-size: 0.88rem;">{{ item.evaluation.improvements }}</p>
+                </div>
+              </div>
+
+              <div class="terminal-card" style="margin-bottom: 0;">
+                <div class="terminal-header">
+                  <span class="terminal-title">exemplary_model_answer.md</span>
+                </div>
+                <div class="terminal-body" style="font-size: 0.9rem;">
+                  {{ item.evaluation.better_answer }}
+                </div>
+              </div>
+            </div>
+          </details>
+        {% endfor %}
+
+        <!-- Footer Actions -->
+        <div style="margin-top: 32px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+          <a href="/reset" class="btn btn-primary btn-lg">
+            Start New Mock Session 🚀
+          </a>
+          <button onclick="window.print()" class="btn btn-secondary btn-lg">
+            🖨️ Export PDF / Print Report
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="app-footer">
+    <div class="container">
+      <p>Fundamentals of Artificial Intelligence (FAI) College Project • Adaptive AI Agent powered by Google Gemini</p>
+    </div>
+  </footer>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

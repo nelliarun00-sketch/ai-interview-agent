@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+{% block title %}Interviews | AI Career Mentor{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 980px;">
+
+  <!-- Banner -->
+  <div style="text-align: center; margin-bottom: 32px;">
+    <div style="display: inline-flex; align-items: center; gap: 8px; background: var(--primary-light); color: var(--primary); padding: 4px 14px; border-radius: var(--radius-pill); font-size: 0.8rem; font-weight: 700; margin-bottom: 12px; border: 1px solid var(--primary-border);">
+      🎙️ ADAPTIVE INTERVIEW SUITE
+    </div>
+    <h1 style="font-size: 2.2rem; font-weight: 800; color: var(--text-main); margin-bottom: 8px;">
+      Multi-Modal AI Interview Simulator
+    </h1>
+    <p style="color: var(--text-muted); font-size: 0.98rem; max-width: 640px; margin: 0 auto;">
+      Adaptive technical questions, algorithmic coding reviews, and STAR-structured HR interviews calibrated for <strong style="color: var(--text-main);">{{ student.goal.career_title }}</strong>.
+    </p>
+  </div>
+
+  <!-- Interview Modes: 3 Clean Cards -->
+  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 36px;">
+    
+    <!-- Mode 1: Technical Interview -->
+    <div class="card" style="border-top: 4px solid var(--primary); display: flex; flex-direction: column; justify-content: space-between;">
+      <div>
+        <div style="font-size: 2rem; margin-bottom: 10px;">🧠</div>
+        <h3 style="color: var(--text-main); font-size: 1.2rem; font-weight: 700; margin: 0 0 8px;">Technical Interview</h3>
+        <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.5; margin-bottom: 16px;">
+          Adaptive technical interrogation targeting your detected skill gaps. Automatically adjusts difficulty turn-by-turn.
+        </p>
+        <ul style="color: var(--text-muted); font-size: 0.82rem; margin-bottom: 20px; padding-left: 18px; line-height: 1.6;">
+          <li>Bayesian knowledge tracing updates</li>
+          <li>Rubric-grounded scoring (0 to 10)</li>
+          <li>Real-time weakness detection</li>
+        </ul>
+      </div>
+
+      <form action="{{ url_for('interview.start_mode') }}" method="POST">
+        <input type="hidden" name="mode" value="technical">
+        <div style="margin-bottom: 12px;">
+          <select name="difficulty" class="form-control" style="padding: 8px 12px; font-size: 0.85rem;">
+            <option value="easy">Easy (Core Fundamentals)</option>
+            <option value="medium" selected>Medium (Standard Round)</option>
+            <option value="hard">Hard (Deep Systems)</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%; font-weight: 700;">
+          Start Technical Round &rarr;
+        </button>
+      </form>
+    </div>
+
+    <!-- Mode 2: Coding Practice & Review -->
+    <div class="card" style="border-top: 4px solid var(--secondary); display: flex; flex-direction: column; justify-content: space-between;">
+      <div>
+        <div style="font-size: 2rem; margin-bottom: 10px;">💻</div>
+        <h3 style="color: var(--text-main); font-size: 1.2rem; font-weight: 700; margin: 0 0 8px;">Coding Interview</h3>
+        <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.5; margin-bottom: 16px;">
+          Write algorithmic code in Python, C++, Java, or JS. Receive in-depth AI architectural and complexity feedback.
+        </p>
+        <div style="background: var(--bg-subtle); border-left: 3px solid var(--secondary); padding: 10px 12px; border-radius: var(--radius-xs); margin-bottom: 20px;">
+          <span style="font-size: 0.76rem; font-weight: 700; color: var(--secondary); display: block;">
+            AI Code Review Engine:
+          </span>
+          <span style="font-size: 0.76rem; color: var(--text-muted);">
+            Evaluates correctness, time &amp; space complexity, edge cases, and code quality.
+          </span>
+        </div>
+      </div>
+
+      <a href="{{ url_for('interview.coding_room') }}" class="btn btn-secondary" style="width: 100%; font-weight: 700; text-align: center;">
+        Start Coding Round &rarr;
+      </a>
+    </div>
+
+    <!-- Mode 3: HR & Behavioral -->
+    <div class="card" style="border-top: 4px solid var(--success); display: flex; flex-direction: column; justify-content: space-between;">
+      <div>
+        <div style="font-size: 2rem; margin-bottom: 10px;">👔</div>
+        <h3 style="color: var(--text-main); font-size: 1.2rem; font-weight: 700; margin: 0 0 8px;">HR / Behavioral</h3>
+        <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.5; margin-bottom: 16px;">
+          Simulate culture-fit, situational, and leadership rounds. Detects STAR methodology adherence and clarity.
+        </p>
+        <ul style="color: var(--text-muted); font-size: 0.82rem; margin-bottom: 20px; padding-left: 18px; line-height: 1.6;">
+          <li>Communication clarity feedback</li>
+          <li>STAR framework breakdown</li>
+          <li>Model response recommendations</li>
+        </ul>
+      </div>
+
+      <form action="{{ url_for('interview.start_mode') }}" method="POST">
+        <input type="hidden" name="mode" value="hr">
+        <div style="margin-bottom: 12px;">
+          <select name="difficulty" class="form-control" style="padding: 8px 12px; font-size: 0.85rem;">
+            <option value="medium" selected>Standard HR Round</option>
+            <option value="hard">Leadership &amp; Conflict Focus</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-outline" style="width: 100%; font-weight: 700; border-color: var(--success); color: var(--success) !important;">
+          Start Behavioral Round &rarr;
+        </button>
+      </form>
+    </div>
+
+  </div>
+
+  <!-- Past Interview History -->
+  <div class="card">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px;">
+      <h3 style="color: var(--text-main); font-size: 1.15rem; font-weight: 700; margin: 0;">
+        Saved Interview History
+      </h3>
+      <a href="{{ url_for('progress.progress_page') }}" class="btn btn-sm btn-outline">
+        View Progress Analytics &rarr;
+      </a>
+    </div>
+
+    {% if student.interviews %}
+    <div style="overflow-x: auto;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+        <thead>
+          <tr style="border-bottom: 1px solid var(--border); color: var(--text-muted); text-align: left; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em;">
+            <th style="padding: 10px;">Mode</th>
+            <th style="padding: 10px;">Target Role</th>
+            <th style="padding: 10px;">Overall Score</th>
+            <th style="padding: 10px;">Questions</th>
+            <th style="padding: 10px;">Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for inv in student.interviews %}
+          <tr style="border-bottom: 1px solid var(--border);">
+            <td style="padding: 12px 10px; font-weight: 700; color: var(--text-main);">{{ inv.mode|title }}</td>
+            <td style="padding: 12px 10px; color: var(--text-muted);">{{ inv.role }}</td>
+            <td style="padding: 12px 10px; font-weight: 800; color: {% if inv.overall_score >= 7 %}var(--success){% elif inv.overall_score >= 5 %}var(--warning){% else %}var(--error){% endif %};">
+              {{ inv.overall_score }} / 10
+            </td>
+            <td style="padding: 12px 10px; color: var(--text-muted);">{{ inv.turns|length }} Turns</td>
+            <td style="padding: 12px 10px; font-size: 0.8rem; color: var(--text-dim);">
+              {{ inv.created_at[:10] if inv.created_at else 'Recent' }}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <div style="text-align: center; padding: 24px; color: var(--text-muted); font-size: 0.9rem;">
+      No mock interviews recorded yet. Choose a mode above to launch your first session!
+    </div>
+    {% endif %}
+  </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{
+  "technical": {
+    "scores": {
+      "0-4": "Incomplete or fundamentally flawed understanding; cannot explain key definitions or operations.",
+      "5-7": "Understands the core concept; communicates basic syntax or principles but misses trade-offs, internal mechanics, or edge cases.",
+      "8-10": "Mastery demonstrated; explains internal implementation, architectural trade-offs, performance implications, and practical examples."
+    },
+    "dimensions": [
+      "Technical Accuracy",
+      "Depth & Mechanics",
+      "Communication Clarity",
+      "Practical Applications"
+    ]
+  },
+  "coding": {
+    "scores": {
+      "0-4": "Syntax errors, incorrect algorithmic approach, or fails standard sample cases.",
+      "5-7": "Functional brute-force or sub-optimal approach; passes primary test cases but misses edge cases or suboptimal time/space complexity.",
+      "8-10": "Optimal algorithmic complexity (e.g. O(n) instead of O(n^2)), handles null/empty/boundary inputs, clean idiomatic variable naming."
+    }
+  },
+  "hr_behavioral": {
+    "star_criteria": {
+      "Situation": "Set the context, company, or technical challenge clearly.",
+      "Task": "Defined personal responsibility and role in the problem.",
+      "Action": "Detailed specific engineering decisions or personal initiatives taken.",
+      "Result": "Quantified business impact, performance gain, or lessons learned."
+    }
+  }
+}

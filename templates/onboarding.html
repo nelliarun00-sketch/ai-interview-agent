@@ -1,0 +1,210 @@
+{% extends "base.html" %}
+{% block title %}Profile Setup | AI Career Mentor{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 760px;">
+
+  <!-- Header -->
+  <div style="text-align: center; margin-bottom: 32px;">
+    <div style="display: inline-flex; align-items: center; gap: 8px; background: var(--primary-light); color: var(--primary); padding: 4px 14px; border-radius: var(--radius-pill); font-size: 0.8rem; font-weight: 700; margin-bottom: 12px; border: 1px solid var(--primary-border);">
+      ✨ FIRST-TIME PROFILE SETUP
+    </div>
+    <h1 style="font-size: 2rem; font-weight: 800; color: var(--text-main); margin-bottom: 8px;">
+      Calibrate Your AI Career Plan
+    </h1>
+    <p style="color: var(--text-muted); font-size: 0.95rem;">
+      Answer 7 quick questions to personalize your skill graph, daily roadmaps, and adaptive mock interviews.
+    </p>
+  </div>
+
+  <form method="POST" action="{{ url_for('onboarding.onboard') }}" class="card" style="padding: 32px;">
+    
+    <!-- Candidate Name (Hidden or prefilled from user account) -->
+    <input type="hidden" name="name" value="{{ current_user.full_name if current_user else (student.profile.name if student else 'Student') }}">
+
+    <!-- STEP 1: EDUCATION -->
+    <div style="margin-bottom: 28px; padding-bottom: 24px; border-bottom: 1px solid var(--border);">
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
+        <span class="badge badge-primary">STEP 1</span>
+        <h3 style="font-size: 1.15rem; font-weight: 700; margin: 0; color: var(--text-main);">Education Background</h3>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+        <div>
+          <label class="form-label" for="education">Degree</label>
+          <select id="education" name="education" class="form-control" required>
+            <option value="B.Tech" selected>B.Tech / B.E.</option>
+            <option value="M.Tech">M.Tech / M.E.</option>
+            <option value="MCA">MCA (Master of Computer Apps)</option>
+            <option value="MSc">M.Sc (Computer Science / Data Science)</option>
+            <option value="BSc">B.Sc / BCA</option>
+            <option value="MBA">MBA (Tech / Product Management)</option>
+            <option value="Other">Other Graduate / PG Degree</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="form-label" for="specialization">Specialization / Branch</label>
+          <input type="text" id="specialization" name="specialization" class="form-control" placeholder="Computer Science & Engineering" value="{{ student.profile.specialization if student else 'Computer Science' }}" required>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+        <div>
+          <label class="form-label" for="graduation_status">Graduation Status</label>
+          <select id="graduation_status" name="graduation_status" class="form-control" required>
+            <option value="Pre-final Year" selected>Current Student (Pre-final Year)</option>
+            <option value="Final Year">Current Student (Final Year)</option>
+            <option value="Recent Graduate">Recent Graduate / Fresher</option>
+            <option value="Working Professional">Career Switcher / Working Professional</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="form-label" for="prep_type">Target Objective</label>
+          <select id="prep_type" name="prep_type" class="form-control" required>
+            <option value="Campus Placements" selected>Campus Placements</option>
+            <option value="Summer Internships">Summer Internships</option>
+            <option value="Off-Campus Jobs">Off-Campus Software Jobs</option>
+            <option value="Career Transition">Career Transition / Switch</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2: CAREER GOAL -->
+    <div style="margin-bottom: 28px; padding-bottom: 24px; border-bottom: 1px solid var(--border);">
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
+        <span class="badge badge-primary">STEP 2</span>
+        <h3 style="font-size: 1.15rem; font-weight: 700; margin: 0; color: var(--text-main);">Target Career Role</h3>
+      </div>
+
+      <div style="margin-bottom: 16px;">
+        <label class="form-label" for="career_id">Select Career Track</label>
+        <select id="career_id" name="career_id" class="form-control" onchange="toggleCustomRole(this.value)" required>
+          {% for c_id, c in careers.items() %}
+            <option value="{{ c_id }}" {% if student and student.goal.career_id == c_id %}selected{% endif %}>
+              {{ c.name }} ({{ c.group }})
+            </option>
+          {% endfor %}
+          <option value="custom">Other / Custom Niche Career Role...</option>
+        </select>
+      </div>
+
+      <div id="customRoleBox" style="display: none; margin-bottom: 16px;">
+        <label class="form-label" for="custom_career">Specify Custom Role</label>
+        <input type="text" id="custom_career" name="custom_career" class="form-control" placeholder="e.g. Quantitative Developer, Blockchain Security Engineer">
+      </div>
+
+      <div>
+        <label class="form-label" for="target_company">Target Companies (Optional)</label>
+        <input type="text" id="target_company" name="target_company" class="form-control" placeholder="e.g. Google, Microsoft, Amazon, FinTech Startups">
+      </div>
+    </div>
+
+    <!-- STEP 3: TECHNICAL SKILLS -->
+    <div style="margin-bottom: 28px; padding-bottom: 24px; border-bottom: 1px solid var(--border);">
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+        <span class="badge badge-primary">STEP 3</span>
+        <h3 style="font-size: 1.15rem; font-weight: 700; margin: 0; color: var(--text-main);">Current Technical Skills</h3>
+      </div>
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 14px;">
+        Click to toggle skills you have basic familiarity with:
+      </p>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px;">
+        {% set skill_tags = ["Python", "C++", "Java", "JavaScript", "SQL", "DSA", "DBMS", "OOP", "OS", "Networks", "System Design", "ML", "Cloud", "Security", "DevOps"] %}
+        {% for tag in skill_tags %}
+          <button type="button" class="btn btn-sm btn-outline skill-toggle-btn" onclick="toggleSkillTag(this, '{{ tag }}')">
+            + {{ tag }}
+          </button>
+        {% endfor %}
+      </div>
+
+      <input type="hidden" id="skills_raw" name="skills_raw" value="Python, SQL, OOP">
+      <div style="font-size: 0.82rem; color: var(--text-muted);">
+        Selected: <span id="selectedSkillsPreview" style="font-weight: 600; color: var(--text-main);">Python, SQL, OOP</span>
+      </div>
+    </div>
+
+    <!-- STEP 4: WEAK AREAS -->
+    <div style="margin-bottom: 28px; padding-bottom: 24px; border-bottom: 1px solid var(--border);">
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
+        <span class="badge badge-primary">STEP 4</span>
+        <h3 style="font-size: 1.15rem; font-weight: 700; margin: 0; color: var(--text-main);">Identified Weak Areas</h3>
+      </div>
+
+      <label class="form-label" for="weak_areas_input">Select or Type Areas Needing Focused Preparation</label>
+      <input type="text" id="weak_areas_input" name="weak_areas" class="form-control" placeholder="e.g. DSA, Dynamic Programming, System Design, Concurrency" value="DSA, System Design">
+      <div style="font-size: 0.78rem; color: var(--text-dim); margin-top: 4px;">
+        The AI interviewer and learning planner will adapt specifically to prioritize these topics.
+      </div>
+    </div>
+
+    <!-- STEP 5 & 6: PREP TIME & EXPERIENCE LEVEL -->
+    <div style="margin-bottom: 32px;">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+        <div>
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+            <span class="badge badge-primary">STEP 5</span>
+            <label class="form-label" for="hours_per_day" style="margin-bottom: 0;">Daily Study Time</label>
+          </div>
+          <select id="hours_per_day" name="hours_per_day" class="form-control" required>
+            <option value="0.5">30 minutes / day</option>
+            <option value="1.0">1 hour / day</option>
+            <option value="2.0" selected>2 hours / day (Recommended)</option>
+            <option value="3.0">3+ hours / day (Intensive)</option>
+          </select>
+        </div>
+
+        <div>
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+            <span class="badge badge-primary">STEP 6</span>
+            <label class="form-label" for="experience_level" style="margin-bottom: 0;">Experience Level</label>
+          </div>
+          <select id="experience_level" name="experience_level" class="form-control" required>
+            <option value="Beginner" selected>Beginner (Fundamentals &amp; Core Concepts)</option>
+            <option value="Intermediate">Intermediate (Project &amp; Problem Solving)</option>
+            <option value="Advanced">Advanced (Systems, Optimization &amp; Architecture)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 7: COMPLETE SETUP -->
+    <div style="text-align: center; padding-top: 10px;">
+      <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; font-weight: 700;">
+        Create My Career Plan &rarr;
+      </button>
+      <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 12px;">
+        Instant calibration &bull; Zero random numbers &bull; Fully private database profile
+      </div>
+    </div>
+
+  </form>
+</div>
+
+<script>
+  function toggleCustomRole(val) {
+    document.getElementById('customRoleBox').style.display = (val === 'custom') ? 'block' : 'none';
+  }
+
+  const selectedSkills = new Set(["Python", "SQL", "OOP"]);
+  function toggleSkillTag(btn, skill) {
+    if (selectedSkills.has(skill)) {
+      selectedSkills.delete(skill);
+      btn.classList.remove('btn-primary');
+      btn.classList.add('btn-outline');
+      btn.textContent = '+ ' + skill;
+    } else {
+      selectedSkills.add(skill);
+      btn.classList.remove('btn-outline');
+      btn.classList.add('btn-primary');
+      btn.textContent = '✓ ' + skill;
+    }
+    const arr = Array.from(selectedSkills);
+    document.getElementById('skills_raw').value = arr.join(', ');
+    document.getElementById('selectedSkillsPreview').textContent = arr.join(', ') || 'None selected';
+  }
+</script>
+{% endblock %}

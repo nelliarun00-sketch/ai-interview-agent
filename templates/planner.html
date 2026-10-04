@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% block title %}Daily AI Plan & Spaced Scheduler{% endblock %}
+
+{% block content %}
+<div style="max-width: 960px; margin: 0 auto; padding-bottom: 60px;">
+
+  <!-- Banner -->
+  <div class="glass-card" style="padding: 30px; border-radius: var(--radius-lg); margin-bottom: 28px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+    <div>
+      <div style="display: inline-flex; align-items: center; gap: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: var(--accent-cyan); margin-bottom: 6px;">
+        <span>📅</span> ALGORITHMIC SM-2 SCHEDULER
+      </div>
+      <h1 style="font-size: 2rem; font-weight: 800; color: var(--text-main); margin-bottom: 4px;">Dynamic 5-Day Action Plan</h1>
+      <p style="color: var(--text-muted); font-size: 0.95rem; margin: 0;">
+        Prioritized for {{ student.profile.name }} ({{ plan.target_hours_per_day }} hrs / {{ plan.daily_minutes }} mins daily allocation).
+      </p>
+    </div>
+
+    <div style="background: var(--bg-subtle); border: 1px solid var(--border); padding: 12px 20px; border-radius: var(--radius-sm); text-align: center;">
+      <div style="font-size: 0.72rem; font-family: 'JetBrains Mono', monospace; color: var(--text-dim);">DAILY ALLOCATION</div>
+      <div style="font-size: 1.6rem; font-weight: 800; color: var(--accent-emerald);">{{ plan.target_hours_per_day }}h</div>
+      <div style="font-size: 0.74rem; color: var(--text-muted);">Pomodoro Balanced</div>
+    </div>
+  </div>
+
+  <!-- Overall Strategy Advice -->
+  <div style="background: var(--primary-light); border-left: 4px solid var(--primary); padding: 14px 20px; border-radius: var(--radius-xs); margin-bottom: 24px;">
+    <strong style="color: var(--primary); font-size: 0.88rem;">💡 Learning Strategy Recommendation:</strong>
+    <p style="color: var(--text-main); font-size: 0.88rem; margin: 4px 0 0;">
+      {{ plan.overall_advice }}
+    </p>
+  </div>
+
+  <!-- Task Days List -->
+  <div style="display: flex; flex-direction: column; gap: 18px;">
+    {% for t in plan.tasks %}
+    {% set is_done = student.plan and t.task_id in student.plan.completed_task_ids %}
+    <div class="glass-card" style="padding: 22px 26px; border-radius: var(--radius-md); display: flex; justify-content: space-between; align-items: center; gap: 20px; {% if is_done %}opacity: 0.7; border-left: 4px solid var(--accent-emerald);{% endif %}">
+      
+      <div style="display: flex; align-items: flex-start; gap: 18px;">
+        <input type="checkbox" onchange="toggleTask('{{ t.task_id }}', this)" {% if is_done %}checked{% endif %} style="accent-color: var(--accent-emerald); width: 22px; height: 22px; cursor: pointer; margin-top: 4px;">
+        
+        <div>
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; font-weight: 700; color: var(--primary); background: var(--primary-light); padding: 2px 8px; border-radius: 4px; border: 1px solid var(--primary-border);">
+              {{ t.day }}
+            </span>
+            <span style="font-size: 0.72rem; padding: 2px 8px; border-radius: 4px; background: var(--bg-subtle); color: var(--text-dim); border: 1px solid var(--border); text-transform: uppercase;">
+              {{ t.task_type }}
+            </span>
+            <span style="font-size: 0.74rem; font-family: 'JetBrains Mono', monospace; color: var(--text-dim);">
+              ⏱️ {{ t.time_minutes }}m
+            </span>
+          </div>
+
+          <h3 style="color: var(--text-main); font-size: 1.08rem; font-weight: 700; margin: 0 0 6px; {% if is_done %}text-decoration: line-through; color: var(--text-dim);{% endif %}">
+            {{ t.title }}
+          </h3>
+
+          <p style="color: var(--text-muted); font-size: 0.88rem; margin: 0 0 4px; line-height: 1.5;">
+            {{ t.focus }}
+          </p>
+          <span style="font-size: 0.82rem; color: var(--text-main); font-weight: 500;">
+            <strong>Action:</strong> {{ t.task }}
+          </span>
+        </div>
+      </div>
+
+      <div style="text-align: right; flex-shrink: 0;">
+        {% if t.task_type == 'test' or t.task_type == 'review' %}
+        <a href="{{ url_for('interview.hub') }}" class="btn btn-outline" style="padding: 6px 14px; font-size: 0.8rem;">
+          Take Quiz ➔
+        </a>
+        {% else %}
+        <a href="{{ url_for('resources.library') }}" class="btn btn-outline" style="padding: 6px 14px; font-size: 0.8rem;">
+          Study Topic ➔
+        </a>
+        {% endif %}
+      </div>
+
+    </div>
+    {% endfor %}
+  </div>
+
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function toggleTask(taskId, checkbox) {
+  const formData = new FormData();
+  formData.append('completed', checkbox.checked);
+
+  fetch(`/planner/toggle-task/${taskId}`, {
+    method: 'POST',
+    body: formData
+  })
+  .then(res => res.json())
+  .then(data => {
+    location.reload();
+  });
+}
+</script>
+{% endblock %}

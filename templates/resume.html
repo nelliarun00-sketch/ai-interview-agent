@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+{% block title %}Resume Intelligence & ATS Screening{% endblock %}
+
+{% block content %}
+<div style="max-width: 1040px; margin: 0 auto; padding-bottom: 60px;">
+
+  <!-- Banner -->
+  <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 28px; flex-wrap: wrap; gap: 16px;">
+    <div>
+      <div style="display: inline-flex; align-items: center; gap: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: var(--accent-emerald); margin-bottom: 6px;">
+        <span>📄</span> NLP RESUME SCREENING & ATS SCORER
+      </div>
+      <h1 style="font-size: 2rem; font-weight: 800; color: var(--text-main); margin-bottom: 4px;">Resume Intelligence</h1>
+      <p style="color: var(--text-muted); font-size: 0.95rem; margin: 0;">
+        Upload your resume for real-time ATS scoring, keyword extraction, bullet rewrites, and project probing questions.
+      </p>
+    </div>
+
+    <!-- Upload Form Card -->
+    <div>
+      <form action="{{ url_for('resume.upload_resume') }}" method="POST" enctype="multipart/form-data" style="display: flex; gap: 10px; align-items: center;">
+        <label for="resume_file" class="btn btn-outline" style="cursor: pointer; padding: 10px 16px; font-size: 0.85rem;">
+          📎 Select PDF / DOCX
+        </label>
+        <input type="file" id="resume_file" name="resume_file" accept=".pdf,.docx,.txt" style="display: none;" onchange="document.getElementById('fileName').innerText = this.files[0]?.name || ''">
+        <span id="fileName" style="font-size: 0.8rem; color: var(--text-dim); max-width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"></span>
+        <button type="submit" class="btn btn-primary" style="padding: 10px 20px; font-weight: 700;">
+          Scan Resume ➔
+        </button>
+      </form>
+    </div>
+  </div>
+
+  {% if analysis %}
+  <!-- Score & Highlights -->
+  <div class="glass-card" style="padding: 30px; border-radius: var(--radius-lg); margin-bottom: 28px;">
+    <div style="display: grid; grid-template-columns: 200px 1fr; gap: 24px; align-items: center;">
+      <!-- Big Score Ring -->
+      <div style="text-align: center; border-right: 1px solid var(--border); padding-right: 20px;">
+        <div style="font-size: 0.74rem; font-family: 'JetBrains Mono', monospace; color: var(--text-dim); margin-bottom: 6px;">ATS COMPATIBILITY</div>
+        <div style="font-size: 3rem; font-weight: 800; color: {% if analysis.ats_score >= 80 %}var(--accent-emerald){% elif analysis.ats_score >= 60 %}var(--accent-amber){% else %}var(--accent-pink){% endif %};">
+          {{ analysis.ats_score }}<span style="font-size: 1.2rem; color: var(--text-dim);">/100</span>
+        </div>
+        <div style="font-size: 0.76rem; color: var(--text-muted); margin-top: 4px;">
+          Calibrated for {{ student.goal.career_title }}
+        </div>
+      </div>
+
+      <!-- Strengths & Missing Skills -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+        <div>
+          <div style="font-size: 0.8rem; font-family: 'JetBrains Mono', monospace; color: var(--accent-emerald); font-weight: 700; margin-bottom: 8px;">
+            DETECTED KEYWORDS ({{ analysis.detected_skills|length }})
+          </div>
+          <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+            {% for s in analysis.detected_skills %}
+            <span style="font-size: 0.76rem; padding: 2px 8px; border-radius: 4px; background: rgba(16, 185, 129, 0.1); color: var(--accent-emerald); border: 1px solid rgba(16, 185, 129, 0.2);">
+              ✓ {{ s }}
+            </span>
+            {% else %}
+            <span style="font-size: 0.8rem; color: var(--text-dim);">No matching skills identified.</span>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div>
+          <div style="font-size: 0.8rem; font-family: 'JetBrains Mono', monospace; color: var(--accent-pink); font-weight: 700; margin-bottom: 8px;">
+            MISSING TARGET SKILLS
+          </div>
+          <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+            {% for m in analysis.missing_target_skills %}
+            <span style="font-size: 0.76rem; padding: 2px 8px; border-radius: 4px; background: rgba(236, 72, 153, 0.1); color: var(--accent-pink); border: 1px solid rgba(236, 72, 153, 0.2);">
+              + {{ m }}
+            </span>
+            {% else %}
+            <span style="font-size: 0.8rem; color: var(--accent-emerald);">All required career skills present!</span>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bullet Improvement Rewrites -->
+  <div style="margin-bottom: 32px;">
+    <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--text-main); margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+      <span>✍️</span> Bullet Point Optimization (Google XYZ Formula)
+    </h2>
+    <div style="display: flex; flex-direction: column; gap: 14px;">
+      {% for b in analysis.bullet_improvements %}
+      <div class="glass-card" style="padding: 20px; border-radius: var(--radius-md);">
+        <div style="font-size: 0.76rem; font-family: 'JetBrains Mono', monospace; color: var(--accent-pink); margin-bottom: 6px;">ORIGINAL BULLET:</div>
+        <p style="font-size: 0.88rem; color: var(--text-main); margin: 0 0 10px; font-style: italic;">
+          "{{ b.original }}"
+        </p>
+
+        <div style="font-size: 0.76rem; font-family: 'JetBrains Mono', monospace; color: var(--accent-emerald); margin-bottom: 6px;">RECOMMENDED IMPACTFUL REWRITE:</div>
+        <p style="font-size: 0.9rem; color: var(--text-main); font-weight: 600; margin: 0 0 8px;">
+          "{{ b.improved }}"
+        </p>
+        <span style="font-size: 0.78rem; color: var(--text-dim);"><strong>Rationale:</strong> {{ b.reason }}</span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Project Probing Questions (Resume-Driven Mock Interview) -->
+  <div>
+    <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--text-main); margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+      <span>🎙️</span> Resume-Driven Technical Questions
+    </h2>
+    <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 16px;">
+      Senior interviewers will interrogate these architectural decisions based on your claimed projects:
+    </p>
+
+    <div style="display: flex; flex-direction: column; gap: 12px;">
+      {% for q in analysis.project_probing_questions %}
+      <div class="glass-card" style="padding: 18px; border-radius: var(--radius-md); display: flex; justify-content: space-between; align-items: center; gap: 16px;">
+        <span style="font-size: 0.92rem; color: var(--text-main); font-weight: 600;">{{ q }}</span>
+        <a href="{{ url_for('interview.hub') }}" class="btn btn-outline" style="padding: 6px 14px; font-size: 0.78rem; white-space: nowrap;">
+          Practice This ➔
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  {% else %}
+  <!-- Empty State -->
+  <div class="glass-card" style="padding: 60px 40px; text-align: center; border-radius: var(--radius-lg);">
+    <div style="font-size: 3rem; margin-bottom: 14px;">📄</div>
+    <h3 style="color: var(--text-main); font-size: 1.3rem; font-weight: 700; margin-bottom: 8px;">No Resume Analyzed Yet</h3>
+    <p style="color: var(--text-muted); font-size: 0.95rem; max-width: 500px; margin: 0 auto 24px;">
+      Upload your resume in PDF or DOCX format to trigger the NLP parser. We evaluate keyword match density against {{ student.goal.career_title }}, quantify metric verbs, and generate targeted interview questions.
+    </p>
+    <label for="resume_file" class="btn btn-primary" style="cursor: pointer; padding: 12px 28px; font-weight: 700;">
+      Upload Resume to Scan
+    </label>
+  </div>
+  {% endif %}
+
+</div>
+{% endblock %}

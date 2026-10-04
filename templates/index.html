@@ -1,0 +1,201 @@
+{% extends "base.html" %}
+{% block title %}AI Career Mentor | AI-Powered Career Platform{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 1040px;">
+
+  <!-- Hero Header -->
+  <div style="text-align: center; padding: 36px 0 28px;">
+    <div style="display: inline-flex; align-items: center; gap: 8px; background: var(--primary-light); color: var(--primary); padding: 5px 14px; border-radius: var(--radius-pill); font-size: 0.82rem; font-weight: 700; margin-bottom: 16px; border: 1px solid var(--primary-border);">
+      ✨ AI CAREER MENTOR PLATFORM
+    </div>
+    <h1 style="font-size: 2.6rem; font-weight: 800; color: var(--text-main); line-height: 1.2; margin-bottom: 12px; letter-spacing: -0.02em;">
+      AI-Powered Interview Preparation &amp;<br>
+      <span style="background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Career Development Platform</span>
+    </h1>
+    <p style="color: var(--text-muted); font-size: 1.05rem; max-width: 680px; margin: 0 auto 24px; line-height: 1.6;">
+      Tailored for engineering students, placement candidates, freshers, and career switchers. Move seamlessly from baseline skill gaps to interview readiness with adaptive Gemini intelligence.
+    </p>
+
+    <!-- Primary CTAs -->
+    <div style="display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin-bottom: 28px;">
+      {% if current_user %}
+        <a href="{{ url_for('main.dashboard') }}" class="btn btn-primary btn-lg" style="font-weight: 700;">
+          Open My Dashboard &rarr;
+        </a>
+        <a href="{{ url_for('interview.hub') }}" class="btn btn-outline btn-lg">
+          Launch Adaptive Mock Interview
+        </a>
+      {% else %}
+        <a href="{{ url_for('auth.signup') }}" class="btn btn-primary btn-lg" style="font-weight: 700;">
+          Create Free Student Account &rarr;
+        </a>
+        <a href="{{ url_for('auth.login') }}" class="btn btn-outline btn-lg" style="font-weight: 600;">
+          Sign In
+        </a>
+      {% endif %}
+    </div>
+
+    <!-- Quick Demo Logins Banner -->
+    <div style="display: inline-flex; align-items: center; gap: 10px; background: var(--bg-card); border: 1px solid var(--border); padding: 8px 16px; border-radius: var(--radius-pill); font-size: 0.82rem; color: var(--text-muted); box-shadow: var(--shadow-sm);">
+      <span style="font-weight: 700; color: var(--text-main);">⚡ Quick Test Demo Accounts:</span>
+      <a href="{{ url_for('auth.login') }}" style="color: var(--primary); font-weight: 600;">Arun (SDE)</a> &bull;
+      <a href="{{ url_for('auth.login') }}" style="color: var(--secondary); font-weight: 600;">Rahul (Data)</a> &bull;
+      <a href="{{ url_for('auth.login') }}" style="color: var(--success); font-weight: 600;">Ananya (AI)</a>
+      <span style="color: var(--text-dim);">(Password: <code>password123</code>)</span>
+    </div>
+  </div>
+
+  <!-- The Closed Feedback Loop Banner -->
+  <div class="card" style="padding: 20px 24px; margin-bottom: 32px; background: var(--bg-surface);">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+      <span style="font-size: 0.78rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em;">
+        Autonomous Closed-Loop Control Architecture
+      </span>
+      <span class="badge badge-primary">FAI Autonomous Agent</span>
+    </div>
+    <div style="display: flex; justify-content: space-between; align-items: center; text-align: center; gap: 6px; overflow-x: auto; padding-bottom: 4px;">
+      <div style="flex: 1; min-width: 90px; padding: 10px 6px; background: var(--bg-subtle); border-radius: 8px; border: 1px solid var(--border);">
+        <div style="font-size: 1.1rem; margin-bottom: 2px;">👁️</div>
+        <strong style="font-size: 0.78rem; color: var(--text-main); display: block;">OBSERVE</strong>
+        <span style="font-size: 0.68rem; color: var(--text-dim);">Profile &amp; Turn</span>
+      </div>
+      <span style="color: var(--primary); font-weight: 700;">&rarr;</span>
+      <div style="flex: 1; min-width: 90px; padding: 10px 6px; background: var(--bg-subtle); border-radius: 8px; border: 1px solid var(--border);">
+        <div style="font-size: 1.1rem; margin-bottom: 2px;">🔍</div>
+        <strong style="font-size: 0.78rem; color: var(--text-main); display: block;">ANALYZE</strong>
+        <span style="font-size: 0.68rem; color: var(--text-dim);">Bayesian BKT</span>
+      </div>
+      <span style="color: var(--primary); font-weight: 700;">&rarr;</span>
+      <div style="flex: 1; min-width: 90px; padding: 10px 6px; background: var(--bg-subtle); border-radius: 8px; border: 1px solid var(--border);">
+        <div style="font-size: 1.1rem; margin-bottom: 2px;">🧭</div>
+        <strong style="font-size: 0.78rem; color: var(--text-main); display: block;">PLAN</strong>
+        <span style="font-size: 0.68rem; color: var(--text-dim);">SM-2 Scheduler</span>
+      </div>
+      <span style="color: var(--primary); font-weight: 700;">&rarr;</span>
+      <div style="flex: 1; min-width: 90px; padding: 10px 6px; background: var(--bg-subtle); border-radius: 8px; border: 1px solid var(--border);">
+        <div style="font-size: 1.1rem; margin-bottom: 2px;">📚</div>
+        <strong style="font-size: 0.78rem; color: var(--text-main); display: block;">RECOMMEND</strong>
+        <span style="font-size: 0.68rem; color: var(--text-dim);">Resource Rank</span>
+      </div>
+      <span style="color: var(--primary); font-weight: 700;">&rarr;</span>
+      <div style="flex: 1; min-width: 90px; padding: 10px 6px; background: var(--bg-subtle); border-radius: 8px; border: 1px solid var(--border);">
+        <div style="font-size: 1.1rem; margin-bottom: 2px;">🎙️</div>
+        <strong style="font-size: 0.78rem; color: var(--text-main); display: block;">TEST</strong>
+        <span style="font-size: 0.68rem; color: var(--text-dim);">Adaptive Rounds</span>
+      </div>
+      <span style="color: var(--primary); font-weight: 700;">&rarr;</span>
+      <div style="flex: 1; min-width: 90px; padding: 10px 6px; background: var(--bg-subtle); border-radius: 8px; border: 1px solid var(--border);">
+        <div style="font-size: 1.1rem; margin-bottom: 2px;">📊</div>
+        <strong style="font-size: 0.78rem; color: var(--text-main); display: block;">EVALUATE</strong>
+        <span style="font-size: 0.68rem; color: var(--text-dim);">Gemini Rubric</span>
+      </div>
+      <span style="color: var(--primary); font-weight: 700;">&rarr;</span>
+      <div style="flex: 1; min-width: 90px; padding: 10px 6px; background: var(--bg-subtle); border-radius: 8px; border: 1px solid var(--border);">
+        <div style="font-size: 1.1rem; margin-bottom: 2px;">🔄</div>
+        <strong style="font-size: 0.78rem; color: var(--text-main); display: block;">ADAPT</strong>
+        <span style="font-size: 0.68rem; color: var(--text-dim);">Update Latency</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3 Cooperating AI Agents Grid -->
+  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 36px;">
+    <!-- Agent 1 -->
+    <div class="card" style="border-top: 4px solid var(--primary);">
+      <div style="font-size: 1.8rem; margin-bottom: 12px;">🧭</div>
+      <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;">
+        1. AI Career Mentor
+      </h3>
+      <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.5; margin-bottom: 14px;">
+        Maps target careers into canonical skill graphs, computes mathematical skill gaps, and audits resumes with ATS scoring.
+      </p>
+      <div style="font-size: 0.78rem; font-weight: 600; color: var(--primary);">
+        &bull; Bayesian Knowledge Tracing<br>
+        &bull; ATS Resume Screener
+      </div>
+    </div>
+
+    <!-- Agent 2 -->
+    <div class="card" style="border-top: 4px solid var(--secondary);">
+      <div style="font-size: 1.8rem; margin-bottom: 12px;">📅</div>
+      <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;">
+        2. AI Learning Planner
+      </h3>
+      <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.5; margin-bottom: 14px;">
+        Generates personalized multi-phase roadmaps, creates 5-day daily action plans using SM-2 spaced repetition, and retrieves learning resources.
+      </p>
+      <div style="font-size: 0.78rem; font-weight: 600; color: var(--secondary);">
+        &bull; SM-2 Spaced Scheduler<br>
+        &bull; Multi-Criteria Recommender
+      </div>
+    </div>
+
+    <!-- Agent 3 -->
+    <div class="card" style="border-top: 4px solid var(--success);">
+      <div style="font-size: 1.8rem; margin-bottom: 12px;">🎙️</div>
+      <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;">
+        3. Adaptive AI Interviewer
+      </h3>
+      <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.5; margin-bottom: 14px;">
+        Runs adaptive Technical Deep Dives, honest algorithmic code reviews, and STAR-grounded HR rounds with rubric-grounded scoring.
+      </p>
+      <div style="font-size: 0.78rem; font-weight: 600; color: var(--success);">
+        &bull; Difficulty Calibration<br>
+        &bull; Structured Evaluation (0-10)
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Start Mock Interview Form (Preserved for backward compatibility & testing) -->
+  <div class="card" style="padding: 28px; margin-bottom: 32px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 8px;">
+      <div>
+        <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--text-main); margin: 0 0 2px;">
+          ⚡ AI Interview Preparation Agent Quick Launcher
+        </h3>
+        <p style="font-size: 0.84rem; color: var(--text-muted); margin: 0;">Start an instant 5-turn adaptive mock session without prior setup</p>
+      </div>
+      <span class="badge badge-primary">Instant Practice</span>
+    </div>
+
+    <form action="{{ url_for('interview.legacy_start_interview') }}" method="POST">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 14px;">
+        <div>
+          <label class="form-label" for="student_name">Student Name</label>
+          <input type="text" id="student_name" name="student_name" class="form-control" value="{{ student.profile.name if student else 'Arun' }}" required>
+        </div>
+        <div>
+          <label class="form-label" for="job_role">Target Job Role</label>
+          <input type="text" id="job_role" name="job_role" class="form-control" value="Python Developer" required>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 18px;">
+        <div>
+          <label class="form-label" for="skills">Current Technical Skills</label>
+          <input type="text" id="skills" name="skills" class="form-control" value="Python, C++, SQL" required>
+        </div>
+        <div>
+          <label class="form-label" for="weak_areas">Initial Weak Areas</label>
+          <input type="text" id="weak_areas" name="weak_areas" class="form-control" value="OOP, DSA" required>
+        </div>
+        <div>
+          <label class="form-label" for="prep_time">Study Commitment</label>
+          <input type="text" id="prep_time" name="prep_time" class="form-control" value="2 hours per day" required>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary" style="font-weight: 700;">
+        Start AI Interview &rarr;
+      </button>
+    </form>
+  </div>
+
+  <!-- Supported Students Footer Row -->
+  <div style="text-align: center; color: var(--text-muted); font-size: 0.84rem;">
+    Supported students: B.Tech &bull; B.E. &bull; M.Tech &bull; M.E. &bull; MCA &bull; MSc &bull; MBA &bull; Freshers &bull; Placement Seekers &bull; Career Switchers
+  </div>
+
+</div>
+{% endblock %}

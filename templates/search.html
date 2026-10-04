@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block title %}Search Catalog{% endblock %}
+
+{% block content %}
+<div style="max-width: 980px; margin: 0 auto; padding-bottom: 60px;">
+
+  <!-- Search Input Header -->
+  <div class="glass-card" style="padding: 28px; border-radius: var(--radius-md); margin-bottom: 30px;">
+    <h1 style="color: var(--text-main); font-size: 1.6rem; font-weight: 800; margin: 0 0 16px;">Global Knowledge Search</h1>
+    <form method="GET" action="{{ url_for('main.search') }}" style="display: flex; gap: 10px;">
+      <input type="text" name="q" class="form-control" placeholder="Search across skills, resources, careers, and projects..." value="{{ query }}" autofocus style="font-size: 1rem; padding: 12px 18px;">
+      <button type="submit" class="btn btn-primary" style="padding: 12px 24px; font-weight: 700;">
+        Search ➔
+      </button>
+    </form>
+  </div>
+
+  {% if query %}
+  <div style="margin-bottom: 20px; font-size: 0.9rem; color: var(--text-dim); font-family: 'JetBrains Mono', monospace;">
+    SEARCH RESULTS FOR: "<strong style="color: var(--text-main);">{{ query }}</strong>"
+  </div>
+
+  <!-- Matched Resources -->
+  {% if results.resources %}
+  <div style="margin-bottom: 30px;">
+    <h2 style="font-size: 1.2rem; font-weight: 800; color: var(--text-main); margin-bottom: 14px;">📚 Resources ({{ results.resources|length }})</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px;">
+      {% for r in results.resources %}
+      <div class="glass-card" style="padding: 18px; border-radius: var(--radius-sm);">
+        <span style="font-size: 0.72rem; color: var(--primary); font-family: 'JetBrains Mono', monospace; font-weight: 700;">{{ r.category }}</span>
+        <h4 style="color: var(--text-main); margin: 4px 0 6px; font-size: 0.98rem;">{{ r.title }}</h4>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
+          <a href="{{ r.url }}" target="_blank" class="btn btn-outline" style="padding: 4px 10px; font-size: 0.76rem;">Launch ↗</a>
+          <span style="font-size: 0.72rem; color: var(--text-dim);">{{ r.cost }}</span>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- Matched Skills -->
+  {% if results.skills %}
+  <div style="margin-bottom: 30px;">
+    <h2 style="font-size: 1.2rem; font-weight: 800; color: var(--text-main); margin-bottom: 14px;">🧠 Skills & Graph Nodes ({{ results.skills|length }})</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px;">
+      {% for s in results.skills %}
+      <div class="glass-card" style="padding: 16px; border-radius: var(--radius-sm);">
+        <h4 style="color: var(--text-main); margin: 0 0 4px; font-size: 0.95rem;">{{ s.name }}</h4>
+        <div style="font-size: 0.78rem; color: var(--text-dim); margin-bottom: 6px;">Category: {{ s.category|title }}</div>
+        <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0;">{{ s.description[:80] }}...</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- Matched Careers -->
+  {% if results.careers %}
+  <div style="margin-bottom: 30px;">
+    <h2 style="font-size: 1.2rem; font-weight: 800; color: var(--text-main); margin-bottom: 14px;">🎯 Careers ({{ results.careers|length }})</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px;">
+      {% for c in results.careers %}
+      <div class="glass-card" style="padding: 16px; border-radius: var(--radius-sm);">
+        <h4 style="color: var(--text-main); margin: 0 0 4px; font-size: 0.95rem;">{{ c.name }}</h4>
+        <span style="font-size: 0.76rem; color: var(--accent-cyan); font-family: 'JetBrains Mono', monospace;">{{ c.group }}</span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  {% if not results.resources and not results.skills and not results.careers and not results.projects %}
+  <div class="glass-card" style="padding: 40px; text-align: center; color: var(--text-dim);">
+    No matching records found in the canonical database.
+  </div>
+  {% endif %}
+
+  {% endif %}
+
+</div>
+{% endblock %}

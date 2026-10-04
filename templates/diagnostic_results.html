@@ -1,0 +1,104 @@
+﻿{% extends "base.html" %}
+{% block title %}Diagnostic Calibration Results{% endblock %}
+
+{% block content %}
+<div style="max-width: 920px; margin: 0 auto; padding-bottom: 60px;">
+
+  <!-- Banner -->
+  <div class="glass-card" style="padding: 36px; border-radius: var(--radius-lg); text-align: center; margin-bottom: 30px; position: relative; overflow: hidden;">
+    <div style="position: absolute; top: -50px; left: 50%; transform: translateX(-50%); width: 280px; height: 120px; background: radial-gradient(circle, rgba(99, 102, 241, 0.4), transparent 70%); pointer-events: none;"></div>
+
+    <span style="font-size: 2.2rem; display: block; margin-bottom: 8px;">🎯</span>
+    <h1 style="font-size: 2.2rem; font-weight: 800; color: #fff; margin-bottom: 6px;">Skill Diagnostic Complete</h1>
+    <p style="color: var(--text-muted); font-size: 1rem; max-width: 580px; margin: 0 auto 24px;">
+      Bayesian knowledge tracing calibrated your skill nodes based on {{ results.total_questions }} deterministic question evaluations.
+    </p>
+
+    <!-- Score Metres -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px;">
+      <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-subtle); padding: 18px; border-radius: var(--radius-sm);">
+        <div style="font-size: 0.76rem; font-family: 'JetBrains Mono', monospace; color: var(--text-dim); text-transform: uppercase;">ACCURACY SCORE</div>
+        <div style="font-size: 2.2rem; font-weight: 800; color: var(--accent-emerald);">{{ results.score_percentage }}%</div>
+        <div style="font-size: 0.8rem; color: var(--text-muted);">{{ results.correct_count }} / {{ results.total_questions }} Correct</div>
+      </div>
+
+      <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-subtle); padding: 18px; border-radius: var(--radius-sm);">
+        <div style="font-size: 0.76rem; font-family: 'JetBrains Mono', monospace; color: var(--text-dim); text-transform: uppercase;">CALIBRATED LEVEL</div>
+        <div style="font-size: 2.2rem; font-weight: 800; color: var(--primary-light);">{{ results.estimated_level }}</div>
+        <div style="font-size: 0.8rem; color: var(--text-muted);">Calibrated for {{ student.goal.career_title }}</div>
+      </div>
+
+      <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-subtle); padding: 18px; border-radius: var(--radius-sm);">
+        <div style="font-size: 0.76rem; font-family: 'JetBrains Mono', monospace; color: var(--text-dim); text-transform: uppercase;">KNOWLEDGE GRAPH</div>
+        <div style="font-size: 2.2rem; font-weight: 800; color: var(--accent-cyan);">{{ student.skills|length }}</div>
+        <div style="font-size: 0.8rem; color: var(--text-muted);">Active Skill Nodes</div>
+      </div>
+    </div>
+
+    <!-- Quick Action Navigation -->
+    <div style="display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;">
+      <a href="{{ url_for('roadmap.view_roadmap') }}" class="btn btn-primary" style="padding: 12px 24px; font-weight: 700;">
+        🗺️ View Personalized Roadmap
+      </a>
+      <a href="{{ url_for('resources.library') }}" class="btn btn-outline" style="padding: 12px 24px; font-weight: 700;">
+        📚 Explore Gaps & Resources
+      </a>
+      <a href="{{ url_for('interview.hub') }}" class="btn btn-outline" style="padding: 12px 24px; font-weight: 700;">
+        🎙️ Start Mock Interview
+      </a>
+    </div>
+  </div>
+
+  <!-- Detailed Question-by-Question Breakdown -->
+  <h2 style="font-size: 1.3rem; font-weight: 800; color: #fff; margin-bottom: 16px;">
+    🔍 Deterministic Question Explanations & Calibration
+  </h2>
+
+  <div style="display: flex; flex-direction: column; gap: 16px;">
+    {% for item in results.detailed_results %}
+    <div class="glass-card" style="padding: 22px; border-radius: var(--radius-md); border-left: 4px solid {% if item.is_correct %}var(--accent-emerald){% else %}var(--accent-pink){% endif %};">
+      
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+        <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; font-weight: 700; color: var(--text-dim);">
+          QUESTION {{ loop.index }} • {{ item.skill_name }}
+        </span>
+        <span style="font-size: 0.78rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; {% if item.is_correct %}background: rgba(16, 185, 129, 0.15); color: var(--accent-emerald);{% else %}background: rgba(236, 72, 153, 0.15); color: var(--accent-pink);{% endif %}">
+          {% if item.is_correct %}✓ Correct{% else %}✗ Incorrect{% endif %}
+        </span>
+      </div>
+
+      <p style="color: #fff; font-size: 0.96rem; font-weight: 600; line-height: 1.5; margin-bottom: 14px;">
+        {{ item.question }}
+      </p>
+
+      <!-- Selected vs Correct -->
+      <div style="background: rgba(0, 0, 0, 0.25); border: 1px solid var(--border-subtle); border-radius: var(--radius-xs); padding: 12px 16px; margin-bottom: 12px; font-size: 0.88rem;">
+        {% if item.selected_option is not none %}
+          <div style="margin-bottom: 4px; color: {% if item.is_correct %}var(--accent-emerald){% else %}var(--accent-pink){% endif %};">
+            <strong>Your Answer:</strong> {{ item.options[item.selected_option] }}
+          </div>
+        {% else %}
+          <div style="margin-bottom: 4px; color: var(--accent-pink);">
+            <strong>Your Answer:</strong> <em>No answer provided</em>
+          </div>
+        {% endif %}
+        {% if not item.is_correct %}
+          <div style="color: var(--accent-emerald);">
+            <strong>Correct Answer:</strong> {{ item.options[item.correct_option] }}
+          </div>
+        {% endif %}
+      </div>
+
+      <!-- Explanation -->
+      {% if item.explanation %}
+      <div style="font-size: 0.84rem; color: var(--text-muted); line-height: 1.5;">
+        <strong style="color: var(--primary-light);">Why:</strong> {{ item.explanation }}
+      </div>
+      {% endif %}
+
+    </div>
+    {% endfor %}
+  </div>
+
+</div>
+{% endblock %}

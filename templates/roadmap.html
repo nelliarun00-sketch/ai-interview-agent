@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+{% block title %}Personalized Learning Roadmap{% endblock %}
+
+{% block content %}
+<div style="max-width: 1040px; margin: 0 auto; padding-bottom: 60px;">
+
+  <!-- Header Banner -->
+  <div class="glass-card" style="padding: 32px; border-radius: var(--radius-lg); margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+    <div>
+      <div style="display: inline-flex; align-items: center; gap: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: var(--accent-cyan); margin-bottom: 8px;">
+        <span>🗺️</span> ADAPTIVE ROADMAP GENERATION
+      </div>
+      <h1 style="font-size: 2rem; font-weight: 800; color: var(--text-main); margin-bottom: 6px;">{{ roadmap.career_title }} Curriculum</h1>
+      <p style="color: var(--text-muted); font-size: 0.95rem; margin: 0;">
+        Personalized for {{ student.profile.name }} ({{ student.profile.hours_per_day }} hrs/day study pacing).
+      </p>
+    </div>
+
+    <!-- Metadata Pill Cluster -->
+    <div style="display: flex; gap: 14px;">
+      <div style="background: var(--bg-subtle); border: 1px solid var(--border); padding: 12px 18px; border-radius: var(--radius-sm); text-align: center;">
+        <div style="font-size: 0.72rem; font-family: 'JetBrains Mono', monospace; color: var(--text-dim);">TOTAL EFFORT</div>
+        <div style="font-size: 1.5rem; font-weight: 800; color: var(--primary);">{{ roadmap.total_estimated_hours }}h</div>
+      </div>
+      <div style="background: var(--bg-subtle); border: 1px solid var(--border); padding: 12px 18px; border-radius: var(--radius-sm); text-align: center;">
+        <div style="font-size: 0.72rem; font-family: 'JetBrains Mono', monospace; color: var(--text-dim);">TARGET COMPLETION</div>
+        <div style="font-size: 1.15rem; font-weight: 700; color: var(--accent-emerald); padding-top: 4px;">{{ roadmap.projected_completion_date }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1fr 340px; gap: 24px; align-items: start;">
+    
+    <!-- Left Column: Interactive Timeline -->
+    <div>
+      <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--text-main); margin-bottom: 18px; display: flex; align-items: center; gap: 8px;">
+        <span>⏱️</span> Phase Progression Timeline
+      </h2>
+
+      <div style="position: relative; padding-left: 32px; border-left: 2px solid var(--border); margin-left: 12px;">
+        {% for phase in roadmap.phases %}
+        <div style="position: relative; margin-bottom: 28px;">
+          <!-- Node Indicator -->
+          <div style="position: absolute; left: -43px; top: 0; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; {% if phase.status == 'completed' %}background: var(--accent-emerald); color: #fff;{% elif phase.status == 'in_progress' %}background: var(--primary); color: #fff; box-shadow: 0 0 12px rgba(99, 102, 241, 0.6);{% else %}background: var(--bg-card); border: 2px solid var(--border); color: var(--text-dim);{% endif %}">
+            {% if phase.status == 'completed' %}✓{% else %}{{ phase.number }}{% endif %}
+          </div>
+
+          <!-- Phase Card -->
+          <div class="glass-card" style="padding: 22px; border-radius: var(--radius-md); {% if phase.status == 'in_progress' %}border-color: var(--primary); background: var(--primary-light);{% endif %}">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; flex-wrap: wrap; gap: 8px;">
+              <div>
+                <h3 style="color: var(--text-main); font-size: 1.1rem; font-weight: 700; margin: 0 0 4px;">{{ phase.title }}</h3>
+                <span style="font-size: 0.78rem; color: var(--text-dim); font-family: 'JetBrains Mono', monospace;">
+                  Est: {{ phase.estimated_hours }} Hours • Target: {{ phase.target_completion }}
+                </span>
+              </div>
+              <span style="font-size: 0.74rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; text-transform: uppercase; {% if phase.status == 'completed' %}background: var(--success-bg); color: var(--success-text); border: 1px solid var(--success-border);{% elif phase.status == 'in_progress' %}background: var(--primary-light); color: var(--primary); border: 1px solid var(--primary-border);{% else %}background: var(--bg-subtle); color: var(--text-dim); border: 1px solid var(--border);{% endif %}">
+                {{ phase.status }}
+              </span>
+            </div>
+
+            <p style="font-size: 0.86rem; color: var(--text-muted); margin-bottom: 14px;">
+              {{ phase.focus_reason }}
+            </p>
+
+            <!-- Skills Covered Tags -->
+            <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px;">
+              {% for s in phase.skills_covered %}
+              <span style="font-size: 0.74rem; padding: 2px 8px; border-radius: 4px; background: var(--bg-subtle); border: 1px solid var(--border); color: var(--text-main);">
+                #{{ s }}
+              </span>
+              {% endfor %}
+            </div>
+
+            <!-- Action Link -->
+            <div style="display: flex; gap: 10px;">
+              <a href="{{ url_for('resources.library') }}" class="btn btn-outline" style="padding: 6px 14px; font-size: 0.8rem;">
+                Browse Phase Resources
+              </a>
+              <a href="{{ url_for('interview.hub') }}" class="btn btn-outline" style="padding: 6px 14px; font-size: 0.8rem;">
+                Practice Checkpoint
+              </a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Right Column: Skill Gaps Feed -->
+    <div>
+      <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--text-main); margin-bottom: 18px; display: flex; align-items: center; gap: 8px;">
+        <span>🎯</span> Priority Skill Gaps
+      </h2>
+
+      <div class="glass-card" style="padding: 22px; border-radius: var(--radius-md);">
+        <p style="font-size: 0.84rem; color: var(--text-muted); margin-bottom: 16px;">
+          Calculated by knowledge tracing against career required mastery benchmarks:
+        </p>
+
+        <div style="display: flex; flex-direction: column; gap: 14px;">
+          {% for gap in gaps %}
+          <div style="border-bottom: 1px solid var(--border); padding-bottom: 12px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+              <span style="font-weight: 700; color: var(--text-main); font-size: 0.9rem;">{{ gap.name }}</span>
+              <span style="font-size: 0.74rem; font-family: 'JetBrains Mono', monospace; font-weight: 700; color: {% if gap.priority > 0.4 %}var(--accent-pink){% elif gap.priority > 0.2 %}var(--accent-amber){% else %}var(--accent-emerald){% endif %};">
+                GAP: {{ (gap.gap * 100)|int }}%
+              </span>
+            </div>
+
+            <div style="background: var(--border); height: 6px; border-radius: 999px; overflow: hidden; margin-bottom: 6px;">
+              <div style="background: var(--primary); height: 100%; width: {{ (gap.current * 100)|int }}%;"></div>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; font-size: 0.74rem; color: var(--text-dim);">
+              <span>Current: {{ (gap.current * 100)|int }}%</span>
+              <span>Target: {{ (gap.required * 100)|int }}%</span>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+{% endblock %}

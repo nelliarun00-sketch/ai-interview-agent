@@ -1,0 +1,80 @@
+﻿{% extends "base.html" %}
+{% block title %}Industry Certifications & Credentials{% endblock %}
+
+{% block content %}
+<div style="max-width: 1040px; margin: 0 auto; padding-bottom: 60px;">
+
+  <!-- Header -->
+  <div style="margin-bottom: 28px;">
+    <div style="display: inline-flex; align-items: center; gap: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: var(--primary-light); margin-bottom: 6px;">
+      <span>🎓</span> VERIFIED INDUSTRY CREDENTIALS
+    </div>
+    <h1 style="font-size: 2.1rem; font-weight: 800; color: #fff; margin-bottom: 4px;">Certifications & Course Standards</h1>
+    <p style="color: var(--text-muted); font-size: 0.95rem; margin: 0;">
+      Transparently categorized: We clearly distinguish proctored official industry certifications from open learning courses.
+    </p>
+  </div>
+
+  <!-- Certifications Grid -->
+  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px;">
+    {% for c in certifications %}
+    <div class="glass-card" style="padding: 24px; border-radius: var(--radius-md); display: flex; flex-direction: column; justify-content: space-between;">
+      
+      <div>
+        <!-- Badges -->
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; gap: 8px;">
+          {% if c.kind == 'official_certification' %}
+          <span style="font-size: 0.72rem; font-family: 'JetBrains Mono', monospace; font-weight: 700; padding: 2px 8px; border-radius: 4px; background: rgba(99, 102, 241, 0.2); color: var(--primary-light); border: 1px solid rgba(99, 102, 241, 0.4);">
+            🏆 OFFICIAL CERTIFICATION
+          </span>
+          {% elif c.kind == 'learning_course' %}
+          <span style="font-size: 0.72rem; font-family: 'JetBrains Mono', monospace; font-weight: 700; padding: 2px 8px; border-radius: 4px; background: rgba(6, 182, 212, 0.15); color: var(--accent-cyan); border: 1px solid rgba(6, 182, 212, 0.3);">
+            📖 LEARNING COURSE
+          </span>
+          {% else %}
+          <span style="font-size: 0.72rem; font-family: 'JetBrains Mono', monospace; font-weight: 700; padding: 2px 8px; border-radius: 4px; background: rgba(245, 158, 11, 0.15); color: var(--accent-amber);">
+            🛠️ PRACTICE RESOURCE
+          </span>
+          {% endif %}
+
+          <span style="font-size: 0.74rem; font-family: 'JetBrains Mono', monospace; color: var(--text-dim);">
+            {{ c.cost }}
+          </span>
+        </div>
+
+        <h3 style="color: #fff; font-size: 1.12rem; font-weight: 700; margin: 0 0 6px;">{{ c.name }}</h3>
+        <div style="font-size: 0.8rem; color: var(--text-dim); margin-bottom: 12px;">Issuer: {{ c.issuer }}</div>
+
+        {% if c.why_recommended %}
+        <div style="background: rgba(255, 255, 255, 0.02); border-left: 3px solid var(--primary); padding: 8px 12px; border-radius: 4px; margin-bottom: 14px; font-size: 0.82rem; color: var(--text-normal);">
+          <strong>Fit:</strong> {{ c.why_recommended }}
+        </div>
+        {% endif %}
+
+        <!-- Prerequisite Readiness -->
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 14px; font-size: 0.8rem;">
+          <span style="color: var(--text-dim);">Prerequisites:</span>
+          {% if c.prerequisite_ready %}
+          <span style="color: var(--accent-emerald); font-weight: 700;">✓ Ready to Tackle</span>
+          {% else %}
+          <span style="color: var(--accent-amber); font-weight: 600;">⚠️ Foundational Skills Needed</span>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Action -->
+      <div style="border-top: 1px solid var(--border-subtle); padding-top: 14px; display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-size: 0.76rem; color: var(--text-dim); font-family: 'JetBrains Mono', monospace;">
+          Est: {{ c.estimated_weeks }} Weeks
+        </span>
+        <a href="{{ c.url }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 6px 14px; font-size: 0.82rem; font-weight: 700;">
+          Official Syllabus ↗
+        </a>
+      </div>
+
+    </div>
+    {% endfor %}
+  </div>
+
+</div>
+{% endblock %}

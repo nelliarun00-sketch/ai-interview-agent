@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block title %}Portfolio Projects & Proof of Work{% endblock %}
+
+{% block content %}
+<div style="max-width: 1060px; margin: 0 auto; padding-bottom: 60px;">
+
+  <!-- Header -->
+  <div style="margin-bottom: 28px;">
+    <div style="display: inline-flex; align-items: center; gap: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: var(--accent-emerald); margin-bottom: 6px;">
+      <span>🛠️</span> PRACTICAL PROOF OF WORK
+    </div>
+    <h1 style="font-size: 2.1rem; font-weight: 800; color: var(--text-main); margin-bottom: 4px;">Recommended Portfolio Projects</h1>
+    <p style="color: var(--text-muted); font-size: 0.95rem; margin: 0;">
+      Real-world engineering projects matched to your gaps for {{ student.goal.career_title }}. Completed projects feed directly into your Readiness Score.
+    </p>
+  </div>
+
+  <!-- Projects Grid -->
+  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 24px;">
+    {% for p in projects %}
+    {% set curr_status = student.project_status.get(p.id, 'Planned') %}
+    <div class="glass-card" style="padding: 26px; border-radius: var(--radius-md); display: flex; flex-direction: column; justify-content: space-between;">
+      
+      <div>
+        <!-- Badges -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <span style="font-size: 0.72rem; font-family: 'JetBrains Mono', monospace; padding: 2px 8px; border-radius: 4px; background: var(--primary-light); color: var(--primary); border: 1px solid var(--primary-border); font-weight: 700;">
+            {{ p.difficulty|upper }}
+          </span>
+          <span style="font-size: 0.72rem; padding: 2px 8px; border-radius: 4px; {% if curr_status == 'Done' %}background: var(--success-bg); color: var(--success-text); border: 1px solid var(--success-border);{% elif curr_status == 'In Progress' %}background: var(--warning-bg); color: var(--warning-text); border: 1px solid var(--warning-border);{% else %}background: var(--bg-subtle); color: var(--text-dim); border: 1px solid var(--border);{% endif %}; font-weight: 700;">
+            {{ curr_status }}
+          </span>
+        </div>
+
+        <h3 style="color: var(--text-main); font-size: 1.18rem; font-weight: 700; margin: 0 0 8px;">{{ p.title }}</h3>
+        <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.5; margin-bottom: 14px;">
+          {{ p.expected_output }}
+        </p>
+
+        <!-- Tech Stack Tags -->
+        <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px;">
+          {% for tech in p.technologies %}
+          <span style="font-size: 0.72rem; padding: 2px 8px; border-radius: 4px; background: var(--bg-subtle); border: 1px solid var(--border); color: var(--text-main); font-family: 'JetBrains Mono', monospace;">
+            {{ tech }}
+          </span>
+          {% endfor %}
+        </div>
+
+        <!-- Milestones list -->
+        <div style="margin-bottom: 16px;">
+          <strong style="font-size: 0.76rem; font-family: 'JetBrains Mono', monospace; color: var(--text-dim); text-transform: uppercase; display: block; margin-bottom: 6px;">Key Architecture Milestones:</strong>
+          <ul style="font-size: 0.82rem; color: var(--text-muted); margin: 0; padding-left: 18px; line-height: 1.5;">
+            {% for m in p.milestones %}
+            <li>{{ m }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+
+      <!-- Footer Action -->
+      <div style="border-top: 1px solid var(--border-subtle); padding-top: 14px; display: flex; justify-content: space-between; align-items: center;">
+        <span style="font-size: 0.76rem; color: var(--text-dim); font-family: 'JetBrains Mono', monospace;">
+          ⏱️ {{ p.estimated_time }}
+        </span>
+
+        <form action="{{ url_for('projects_certs.update_project_status', project_id=p.id) }}" method="POST" style="display: flex; gap: 6px; margin: 0;">
+          <select name="status" class="form-control" style="padding: 4px 8px; font-size: 0.78rem; width: auto;" onchange="this.form.submit()">
+            <option value="Planned" {% if curr_status == 'Planned' %}selected{% endif %}>Planned</option>
+            <option value="In Progress" {% if curr_status == 'In Progress' %}selected{% endif %}>In Progress</option>
+            <option value="Done" {% if curr_status == 'Done' %}selected{% endif %}>Done</option>
+          </select>
+        </form>
+      </div>
+
+    </div>
+    {% endfor %}
+  </div>
+
+</div>
+{% endblock %}

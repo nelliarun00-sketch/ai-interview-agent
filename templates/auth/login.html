@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block title %}Sign In | AI Career Mentor{% endblock %}
+
+{% block content %}
+<div class="auth-wrapper">
+  <div class="auth-card">
+    <div style="text-align: center; margin-bottom: 28px;">
+      <div style="display: inline-flex; align-items: center; justify-content: center; width: 52px; height: 52px; border-radius: 14px; background: var(--accent-gradient); color: #FFF; font-size: 1.6rem; margin-bottom: 12px; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);">
+        🤖
+      </div>
+      <h2 style="font-size: 1.65rem; font-weight: 800; color: var(--text-main); margin-bottom: 6px;">
+        Welcome back 👋
+      </h2>
+      <p style="color: var(--text-muted); font-size: 0.92rem;">
+        Sign in to continue your career preparation.
+      </p>
+    </div>
+
+    <!-- Demo Account Quick Sign-in Pills for Testing -->
+    <div style="background: var(--bg-subtle); border: 1px dashed var(--border); border-radius: var(--radius-sm); padding: 12px; margin-bottom: 22px;">
+      <div style="font-size: 0.76rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 8px;">
+        ⚡ Instant Demo Logins (Password: <code>password123</code>):
+      </div>
+      <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+        <button type="button" onclick="fillLogin('arun@example.com', 'password123')" class="btn btn-sm btn-outline" style="font-size: 0.78rem; padding: 4px 8px;">
+          👨‍💻 Arun (SDE / 72%)
+        </button>
+        <button type="button" onclick="fillLogin('rahul@example.com', 'password123')" class="btn btn-sm btn-outline" style="font-size: 0.78rem; padding: 4px 8px;">
+          📊 Rahul (Data / 61%)
+        </button>
+        <button type="button" onclick="fillLogin('ananya@example.com', 'password123')" class="btn btn-sm btn-outline" style="font-size: 0.78rem; padding: 4px 8px;">
+          🧠 Ananya (AI / 80%)
+        </button>
+      </div>
+    </div>
+
+    <form method="POST" action="{{ url_for('auth.login', next=request.args.get('next')) }}">
+      <div class="form-group">
+        <label class="form-label" for="email">Email Address</label>
+        <input type="email" id="email" name="email" class="form-control" placeholder="arun@example.com" required autofocus>
+      </div>
+
+      <div class="form-group">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+          <label class="form-label" for="password" style="margin-bottom: 0;">Password</label>
+          <a href="#" onclick="alert('For demo accounts, use password: password123. For personal accounts, you can re-register or update via your profile.'); return false;" style="font-size: 0.8rem; color: var(--primary);">Forgot Password?</a>
+        </div>
+        <input type="password" id="password" name="password" class="form-control" placeholder="••••••••" required>
+      </div>
+
+      <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px; font-weight: 700;">
+        Sign In ➔
+      </button>
+
+      <!-- Future-ready Google Auth Button -->
+      <div style="margin-top: 16px; text-align: center;">
+        <button type="button" onclick="alert('Google SSO integration ready for institutional OAuth2 deployment. Please use email & password login.')" class="btn btn-outline" style="width: 100%; font-size: 0.88rem; display: flex; align-items: center; justify-content: center; gap: 8px;">
+          <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.36 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.99 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.36 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/></svg>
+          Continue with Google
+        </button>
+      </div>
+    </form>
+
+    <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border); text-align: center; font-size: 0.9rem; color: var(--text-muted);">
+      Don't have an account?
+      <a href="{{ url_for('auth.signup') }}" style="font-weight: 700; color: var(--primary); margin-left: 4px;">Create Account</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  function fillLogin(email, pass) {
+    document.getElementById('email').value = email;
+    document.getElementById('password').value = pass;
+  }
+</script>
+{% endblock %}

@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+{% block title %}Learning Hub | AI Career Mentor{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 1040px;">
+
+  <!-- Header -->
+  <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px; flex-wrap: wrap; gap: 16px;">
+    <div>
+      <span style="font-size: 0.78rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.08em; display: block; margin-bottom: 4px;">
+        LEARNING &amp; PRACTICE
+      </span>
+      <h1 style="font-size: 2rem; font-weight: 800; color: var(--text-main); margin-bottom: 4px;">
+        Verified Learning Library
+      </h1>
+      <p style="color: var(--text-muted); font-size: 0.95rem; margin: 0;">
+        Ranked mathematically for <strong>{{ student.goal.career_title }}</strong> based on your detected skill gaps and prerequisites.
+      </p>
+    </div>
+
+    <div>
+      <a href="{{ url_for('resources.my_resources') }}" class="btn btn-outline" style="font-weight: 600;">
+        🔖 My Saved &amp; Active Resources ({{ student.resources|length }})
+      </a>
+    </div>
+  </div>
+
+  <!-- Filter & Search Toolbar -->
+  <div class="card" style="padding: 18px; margin-bottom: 24px;">
+    <form method="GET" action="{{ url_for('resources.library') }}" style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr auto; gap: 12px; align-items: center;">
+      <input type="text" name="search" class="form-control" placeholder="Search topics, platforms, skills..." value="{{ search_query }}">
+
+      <select name="category" class="form-control">
+        <option value="">All Categories</option>
+        {% for cat in categories %}
+        <option value="{{ cat }}" {% if selected_category == cat %}selected{% endif %}>{{ cat }}</option>
+        {% endfor %}
+      </select>
+
+      <select name="level" class="form-control">
+        <option value="">All Levels</option>
+        <option value="Beginner" {% if selected_level == 'Beginner' %}selected{% endif %}>Beginner</option>
+        <option value="Intermediate" {% if selected_level == 'Intermediate' %}selected{% endif %}>Intermediate</option>
+        <option value="Advanced" {% if selected_level == 'Advanced' %}selected{% endif %}>Advanced</option>
+      </select>
+
+      <select name="cost" class="form-control">
+        <option value="">All Costs</option>
+        <option value="Free" {% if selected_cost == 'Free' %}selected{% endif %}>Free</option>
+        <option value="Freemium" {% if selected_cost == 'Freemium' %}selected{% endif %}>Freemium</option>
+        <option value="Paid" {% if selected_cost == 'Paid' %}selected{% endif %}>Paid</option>
+      </select>
+
+      <button type="submit" class="btn btn-primary" style="font-weight: 700;">
+        Filter
+      </button>
+    </form>
+  </div>
+
+  <!-- Resources Grid -->
+  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 20px;">
+    {% for r in resources %}
+    <div class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
+      
+      <div>
+        <!-- Badges Bar -->
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; gap: 8px;">
+          <span class="badge badge-primary">
+            {{ r.category }}
+          </span>
+          <div style="display: flex; gap: 6px;">
+            <span class="badge badge-success">
+              {{ r.cost }}
+            </span>
+            <span class="badge" style="background: var(--bg-subtle); color: var(--text-muted); border: 1px solid var(--border);">
+              {{ r.level }}
+            </span>
+          </div>
+        </div>
+
+        <h3 style="color: var(--text-main); font-size: 1.05rem; font-weight: 700; margin: 0 0 8px; line-height: 1.4;">
+          {{ r.title }}
+        </h3>
+
+        <p style="color: var(--text-muted); font-size: 0.85rem; line-height: 1.5; margin-bottom: 12px;">
+          {{ r.description }}
+        </p>
+
+        <!-- Why Recommended Reason -->
+        {% if r.why_recommended %}
+        <div style="background: var(--primary-light); border-left: 3px solid var(--primary); padding: 8px 12px; border-radius: var(--radius-xs); margin-bottom: 14px;">
+          <span style="font-size: 0.74rem; color: var(--primary); font-weight: 700; display: block;">
+            💡 Why Recommended:
+          </span>
+          <span style="font-size: 0.76rem; color: var(--text-main);">
+            {{ r.why_recommended }}
+          </span>
+        </div>
+        {% endif %}
+
+        <!-- Metadata -->
+        <div style="display: flex; gap: 12px; font-size: 0.76rem; color: var(--text-dim); margin-bottom: 16px;">
+          <span>⏱️ {{ r.estimated_time_minutes }} mins</span>
+          <span>🏛️ {{ r.author_or_platform if r.author_or_platform else r.source_type|title }}</span>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); padding-top: 14px;">
+        <a href="{{ r.url }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-primary" style="font-weight: 600;">
+          Launch Resource ↗
+        </a>
+
+        <div style="display: flex; gap: 6px;">
+          <button onclick="toggleBookmark('{{ r.id }}', this)" class="btn btn-sm btn-outline" title="Save Bookmark">
+            {% if student.resources.get(r.id, {}).get('bookmarked') %}★ Saved{% else %}🔖 Save{% endif %}
+          </button>
+          
+          <form action="{{ url_for('resources.update_progress', resource_id=r.id) }}" method="POST" style="margin: 0;">
+            {% if student.resources.get(r.id, {}).get('status') == 'completed' %}
+              <input type="hidden" name="status" value="in_progress">
+              <button type="submit" class="btn btn-sm btn-outline" style="border-color: var(--success); color: var(--success) !important;" title="Marked as completed">
+                ✓ Done
+              </button>
+            {% else %}
+              <input type="hidden" name="status" value="completed">
+              <button type="submit" class="btn btn-sm btn-outline" title="Mark as Completed">
+                Mark Done
+              </button>
+            {% endif %}
+          </form>
+        </div>
+      </div>
+
+    </div>
+    {% else %}
+    <div class="card" style="grid-column: 1 / -1; padding: 40px; text-align: center;">
+      <p style="color: var(--text-muted); font-size: 1rem; margin: 0;">No learning resources matched your filter. Try adjusting your search.</p>
+    </div>
+    {% endfor %}
+  </div>
+
+</div>
+
+<script>
+function toggleBookmark(resourceId, btn) {
+  fetch(`/resources/bookmark/${resourceId}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' }
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.bookmarked) {
+      btn.classList.remove('btn-outline');
+      btn.classList.add('btn-primary');
+      btn.innerHTML = '★ Saved';
+    } else {
+      btn.classList.remove('btn-primary');
+      btn.classList.add('btn-outline');
+      btn.innerHTML = '🔖 Save';
+    }
+  });
+}
+</script>
+{% endblock %}

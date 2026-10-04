@@ -1,0 +1,167 @@
+{
+  "python": {
+    "id": "python",
+    "name": "Python Programming",
+    "category": "Programming",
+    "prerequisites": [],
+    "description": "Core syntax, data types, iterators, decorators, memory management."
+  },
+  "cpp": {
+    "id": "cpp",
+    "name": "C++ Programming",
+    "category": "Programming",
+    "prerequisites": [],
+    "description": "Pointers, memory management, templates, STL, Modern C++."
+  },
+  "javascript": {
+    "id": "javascript",
+    "name": "JavaScript / TypeScript",
+    "category": "Programming",
+    "prerequisites": [],
+    "description": "ES6+, asynchronous event loop, promises, types, DOM manipulation."
+  },
+  "dsa": {
+    "id": "dsa",
+    "name": "Data Structures & Algorithms",
+    "category": "Core CS",
+    "prerequisites": [
+      "python"
+    ],
+    "description": "Arrays, linked lists, trees, graphs, sorting, dynamic programming."
+  },
+  "oop": {
+    "id": "oop",
+    "name": "Object-Oriented Programming",
+    "category": "Core CS",
+    "prerequisites": [
+      "python"
+    ],
+    "description": "Encapsulation, inheritance, polymorphism, abstraction, design patterns."
+  },
+  "dbms": {
+    "id": "dbms",
+    "name": "Database Management & SQL",
+    "category": "Databases",
+    "prerequisites": [],
+    "description": "Relational algebra, SQL joins, ACID properties, indexing, normalization."
+  },
+  "sql": {
+    "id": "sql",
+    "name": "Advanced SQL Analytics",
+    "category": "Databases",
+    "prerequisites": [
+      "dbms"
+    ],
+    "description": "Window functions, CTEs, aggregation pipelines, performance query tuning."
+  },
+  "os": {
+    "id": "os",
+    "name": "Operating Systems",
+    "category": "Core CS",
+    "prerequisites": [],
+    "description": "Processes, threads, CPU scheduling, virtual memory, concurrency, deadlocks."
+  },
+  "networks": {
+    "id": "networks",
+    "name": "Computer Networks",
+    "category": "Core CS",
+    "prerequisites": [],
+    "description": "OSI model, TCP/IP, DNS, HTTP/HTTPS, routing protocols, sockets."
+  },
+  "system_design": {
+    "id": "system_design",
+    "name": "System Design & Architecture",
+    "category": "Architecture",
+    "prerequisites": [
+      "dsa",
+      "dbms",
+      "networks"
+    ],
+    "description": "Load balancing, caching, microservices, scalability, CAP theorem."
+  },
+  "web_basics": {
+    "id": "web_basics",
+    "name": "Web Technologies & REST APIs",
+    "category": "Web",
+    "prerequisites": [
+      "javascript"
+    ],
+    "description": "HTML5, CSS3, REST conventions, HTTP headers, authentication (JWT/OAuth)."
+  },
+  "statistics": {
+    "id": "statistics",
+    "name": "Statistics & Probability",
+    "category": "Mathematics",
+    "prerequisites": [],
+    "description": "Descriptive statistics, hypothesis testing, Bayes theorem, distributions."
+  },
+  "data_analysis": {
+    "id": "data_analysis",
+    "name": "Data Analysis & Wrangling",
+    "category": "Data",
+    "prerequisites": [
+      "python",
+      "statistics"
+    ],
+    "description": "Pandas, NumPy, data cleaning, exploratory data analysis, visualization."
+  },
+  "machine_learning": {
+    "id": "machine_learning",
+    "name": "Machine Learning",
+    "category": "AI & ML",
+    "prerequisites": [
+      "python",
+      "statistics",
+      "data_analysis"
+    ],
+    "description": "Supervised, unsupervised, regression, classification, clustering, bias-variance."
+  },
+  "deep_learning": {
+    "id": "deep_learning",
+    "name": "Deep Learning & Neural Networks",
+    "category": "AI & ML",
+    "prerequisites": [
+      "machine_learning"
+    ],
+    "description": "CNNs, RNNs, Transformers, backpropagation, PyTorch, model fine-tuning."
+  },
+  "cloud": {
+    "id": "cloud",
+    "name": "Cloud Computing (AWS / Azure)",
+    "category": "Cloud & DevOps",
+    "prerequisites": [
+      "os",
+      "networks"
+    ],
+    "description": "Compute (EC2), storage (S3), VPC, IAM, serverless, cloud architecture."
+  },
+  "devops": {
+    "id": "devops",
+    "name": "DevOps & CI/CD",
+    "category": "Cloud & DevOps",
+    "prerequisites": [
+      "cloud",
+      "os"
+    ],
+    "description": "Docker, Kubernetes, GitHub Actions, Terraform, monitoring and logging."
+  },
+  "cybersecurity": {
+    "id": "cybersecurity",
+    "name": "Cybersecurity & Threat Analysis",
+    "category": "Security",
+    "prerequisites": [
+      "networks",
+      "os"
+    ],
+    "description": "Vulnerability assessment, cryptography, penetration testing, SIEM, OWASP Top 10."
+  },
+  "embedded_systems": {
+    "id": "embedded_systems",
+    "name": "Embedded Systems & Microcontrollers",
+    "category": "Hardware & IoT",
+    "prerequisites": [
+      "cpp"
+    ],
+    "description": "ARM/AVR architectures, UART/SPI/I2C protocols, RTOS, GPIO interfacing."
+  }
+}

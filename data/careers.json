@@ -1,0 +1,332 @@
+{
+  "software_engineer": {
+    "id": "software_engineer",
+    "name": "Software Engineer",
+    "group": "Software Engineering",
+    "description": "Builds robust, scalable software applications and services.",
+    "skills": [
+      {
+        "skill_id": "python",
+        "weight": 0.8,
+        "required_mastery": 0.7
+      },
+      {
+        "skill_id": "dsa",
+        "weight": 1.0,
+        "required_mastery": 0.75
+      },
+      {
+        "skill_id": "oop",
+        "weight": 0.9,
+        "required_mastery": 0.75
+      },
+      {
+        "skill_id": "dbms",
+        "weight": 0.8,
+        "required_mastery": 0.7
+      },
+      {
+        "skill_id": "os",
+        "weight": 0.7,
+        "required_mastery": 0.65
+      },
+      {
+        "skill_id": "networks",
+        "weight": 0.6,
+        "required_mastery": 0.6
+      }
+    ],
+    "roadmap_template": [
+      "programming_basics",
+      "oop_mastery",
+      "dsa_core",
+      "database_systems",
+      "computer_systems",
+      "mock_interview_prep"
+    ],
+    "interview_focus": [
+      "dsa",
+      "oop",
+      "dbms",
+      "os",
+      "problem_solving"
+    ]
+  },
+  "data_scientist": {
+    "id": "data_scientist",
+    "name": "Data Scientist",
+    "group": "Data & Analytics",
+    "description": "Extracts actionable insights from complex datasets using statistics and ML.",
+    "skills": [
+      {
+        "skill_id": "python",
+        "weight": 0.9,
+        "required_mastery": 0.75
+      },
+      {
+        "skill_id": "statistics",
+        "weight": 1.0,
+        "required_mastery": 0.75
+      },
+      {
+        "skill_id": "sql",
+        "weight": 0.9,
+        "required_mastery": 0.7
+      },
+      {
+        "skill_id": "machine_learning",
+        "weight": 1.0,
+        "required_mastery": 0.8
+      },
+      {
+        "skill_id": "data_analysis",
+        "weight": 0.8,
+        "required_mastery": 0.7
+      }
+    ],
+    "roadmap_template": [
+      "python_for_data",
+      "statistics_prob",
+      "data_wrangling_sql",
+      "ml_foundations",
+      "deep_learning_intro",
+      "portfolio_projects"
+    ],
+    "interview_focus": [
+      "statistics",
+      "machine_learning",
+      "python",
+      "sql",
+      "model_evaluation"
+    ]
+  },
+  "ai_ml_engineer": {
+    "id": "ai_ml_engineer",
+    "name": "AI / Machine Learning Engineer",
+    "group": "Artificial Intelligence & ML",
+    "description": "Designs, trains, and deploys scalable machine learning and deep learning models.",
+    "skills": [
+      {
+        "skill_id": "python",
+        "weight": 0.9,
+        "required_mastery": 0.8
+      },
+      {
+        "skill_id": "machine_learning",
+        "weight": 1.0,
+        "required_mastery": 0.85
+      },
+      {
+        "skill_id": "deep_learning",
+        "weight": 1.0,
+        "required_mastery": 0.8
+      },
+      {
+        "skill_id": "statistics",
+        "weight": 0.9,
+        "required_mastery": 0.75
+      },
+      {
+        "skill_id": "dsa",
+        "weight": 0.7,
+        "required_mastery": 0.65
+      }
+    ],
+    "roadmap_template": [
+      "python_advanced",
+      "linear_algebra_stats",
+      "classical_ml",
+      "neural_networks_pytorch",
+      "nlp_cv_llms",
+      "mlops_deployment"
+    ],
+    "interview_focus": [
+      "machine_learning",
+      "deep_learning",
+      "statistics",
+      "python",
+      "model_deployment"
+    ]
+  },
+  "fullstack_developer": {
+    "id": "fullstack_developer",
+    "name": "Full-Stack Developer",
+    "group": "Software Engineering",
+    "description": "Builds complete end-to-end web applications across frontend, backend, and databases.",
+    "skills": [
+      {
+        "skill_id": "javascript",
+        "weight": 0.9,
+        "required_mastery": 0.75
+      },
+      {
+        "skill_id": "web_basics",
+        "weight": 0.8,
+        "required_mastery": 0.7
+      },
+      {
+        "skill_id": "python",
+        "weight": 0.8,
+        "required_mastery": 0.7
+      },
+      {
+        "skill_id": "dbms",
+        "weight": 0.9,
+        "required_mastery": 0.75
+      },
+      {
+        "skill_id": "system_design",
+        "weight": 0.7,
+        "required_mastery": 0.65
+      }
+    ],
+    "roadmap_template": [
+      "frontend_foundations",
+      "backend_api_development",
+      "relational_nosql_db",
+      "state_management",
+      "system_design_basics",
+      "fullstack_capstone"
+    ],
+    "interview_focus": [
+      "javascript",
+      "web_basics",
+      "dbms",
+      "system_design",
+      "api_security"
+    ]
+  },
+  "cloud_devops_engineer": {
+    "id": "cloud_devops_engineer",
+    "name": "Cloud & DevOps Engineer",
+    "group": "Cloud & DevOps",
+    "description": "Automates deployment pipelines, provisions cloud infrastructure, and ensures reliability.",
+    "skills": [
+      {
+        "skill_id": "os",
+        "weight": 0.9,
+        "required_mastery": 0.75
+      },
+      {
+        "skill_id": "networks",
+        "weight": 0.9,
+        "required_mastery": 0.75
+      },
+      {
+        "skill_id": "cloud",
+        "weight": 1.0,
+        "required_mastery": 0.8
+      },
+      {
+        "skill_id": "devops",
+        "weight": 1.0,
+        "required_mastery": 0.8
+      },
+      {
+        "skill_id": "python",
+        "weight": 0.7,
+        "required_mastery": 0.65
+      }
+    ],
+    "roadmap_template": [
+      "linux_networking",
+      "shell_python_automation",
+      "containerization_docker",
+      "cloud_aws_azure",
+      "ci_cd_kubernetes",
+      "infra_as_code"
+    ],
+    "interview_focus": [
+      "cloud",
+      "devops",
+      "os",
+      "networks",
+      "incident_management"
+    ]
+  },
+  "cybersecurity_analyst": {
+    "id": "cybersecurity_analyst",
+    "name": "Cybersecurity Analyst",
+    "group": "Cybersecurity",
+    "description": "Protects digital assets, detects vulnerabilities, and monitors threat vectors.",
+    "skills": [
+      {
+        "skill_id": "networks",
+        "weight": 1.0,
+        "required_mastery": 0.8
+      },
+      {
+        "skill_id": "cybersecurity",
+        "weight": 1.0,
+        "required_mastery": 0.85
+      },
+      {
+        "skill_id": "os",
+        "weight": 0.9,
+        "required_mastery": 0.75
+      },
+      {
+        "skill_id": "python",
+        "weight": 0.7,
+        "required_mastery": 0.6
+      }
+    ],
+    "roadmap_template": [
+      "network_security_fundamentals",
+      "operating_system_hardening",
+      "vulnerability_assessment",
+      "soc_siem_tools",
+      "incident_response",
+      "security_audits"
+    ],
+    "interview_focus": [
+      "cybersecurity",
+      "networks",
+      "os",
+      "incident_response",
+      "threat_modeling"
+    ]
+  },
+  "embedded_iot_engineer": {
+    "id": "embedded_iot_engineer",
+    "name": "Embedded Systems & IoT Engineer",
+    "group": "Embedded & IoT",
+    "description": "Programs microcontrollers and develops firmware for smart IoT hardware devices.",
+    "skills": [
+      {
+        "skill_id": "cpp",
+        "weight": 1.0,
+        "required_mastery": 0.8
+      },
+      {
+        "skill_id": "os",
+        "weight": 0.8,
+        "required_mastery": 0.7
+      },
+      {
+        "skill_id": "embedded_systems",
+        "weight": 1.0,
+        "required_mastery": 0.8
+      },
+      {
+        "skill_id": "networks",
+        "weight": 0.7,
+        "required_mastery": 0.65
+      }
+    ],
+    "roadmap_template": [
+      "c_cpp_mastery",
+      "microcontroller_arch",
+      "rtos_and_firmware",
+      "sensors_protocols",
+      "iot_cloud_connectivity",
+      "hardware_projects"
+    ],
+    "interview_focus": [
+      "cpp",
+      "embedded_systems",
+      "os",
+      "hardware_protocols"
+    ]
+  }
+}

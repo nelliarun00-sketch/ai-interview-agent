@@ -1,0 +1,1183 @@
+[
+  {
+    "id": "res_py_01",
+    "title": "Official Python 3 Documentation & Tutorial",
+    "category": "Python",
+    "skill_ids": [
+      "python"
+    ],
+    "description": "The definitive tutorial covering Python syntax, data structures, and standard library modules.",
+    "level": "Beginner",
+    "cost": "free",
+    "type": "Documentation",
+    "url": "https://docs.python.org/3/tutorial/",
+    "recommended_for": [
+      "software_engineer",
+      "data_scientist",
+      "ai_ml_engineer",
+      "fullstack_developer"
+    ],
+    "estimated_time_minutes": 240,
+    "difficulty": "easy",
+    "source_type": "official",
+    "language": "English",
+    "source": "Python Software Foundation",
+    "last_verified": null,
+    "tags": [
+      "python",
+      "basics",
+      "official"
+    ]
+  },
+  {
+    "id": "res_py_02",
+    "title": "Real Python: Python 3 Fundamentals",
+    "category": "Python",
+    "skill_ids": [
+      "python"
+    ],
+    "description": "Step-by-step practical guides, exercises, and best practices for modern Python developers.",
+    "level": "Beginner",
+    "cost": "free",
+    "type": "Article / Tutorial",
+    "url": "https://realpython.com/",
+    "recommended_for": [
+      "software_engineer",
+      "data_scientist",
+      "ai_ml_engineer"
+    ],
+    "estimated_time_minutes": 180,
+    "difficulty": "easy",
+    "source_type": "platform",
+    "language": "English",
+    "source": "Real Python",
+    "last_verified": null,
+    "tags": [
+      "python",
+      "practice"
+    ]
+  },
+  {
+    "id": "res_py_03",
+    "title": "Python Design Patterns & Idiomatic Code",
+    "category": "Python",
+    "skill_ids": [
+      "python",
+      "oop"
+    ],
+    "description": "Advanced guide to decorators, generators, context managers, and OOP design patterns.",
+    "level": "Intermediate",
+    "cost": "free",
+    "type": "Documentation",
+    "url": "https://python-patterns.guide/",
+    "recommended_for": [
+      "software_engineer",
+      "ai_ml_engineer"
+    ],
+    "estimated_time_minutes": 150,
+    "difficulty": "medium",
+    "source_type": "community",
+    "language": "English",
+    "source": "Brandon Rhodes",
+    "last_verified": null,
+    "tags": [
+      "python",
+      "design_patterns",
+      "oop"
+    ]
+  },
+  {
+    "id": "res_py_04",
+    "title": "Automate the Boring Stuff with Python",
+    "category": "Python",
+    "skill_ids": [
+      "python"
+    ],
+    "description": "Practical programming for total beginners focusing on automation and file handling.",
+    "level": "Beginner",
+    "cost": "free",
+    "type": "Book / Course",
+    "url": "https://automatetheboringstuff.com/",
+    "recommended_for": [
+      "software_engineer",
+      "data_scientist"
+    ],
+    "estimated_time_minutes": 300,
+    "difficulty": "easy",
+    "source_type": "official",
+    "language": "English",
+    "source": "Al Sweigart",
+    "last_verified": null,
+    "tags": [
+      "automation",
+      "python",
+      "hands-on"
+    ]
+  },
+  {
+    "id": "res_py_05",
+    "title": "Fluent Python Reference Notes",
+    "category": "Python",
+    "skill_ids": [
+      "python"
+    ],
+    "description": "Deep dive into Python data model, descriptors, metclasses, and concurrency.",
+    "level": "Advanced",
+    "cost": "freemium",
+    "type": "Book / Practice",
+    "url": "https://www.oreilly.com/library/view/fluent-python-2nd/9781492056348/",
+    "recommended_for": [
+      "software_engineer",
+      "ai_ml_engineer"
+    ],
+    "estimated_time_minutes": 360,
+    "difficulty": "hard",
+    "source_type": "platform",
+    "language": "English",
+    "source": "O Reilly",
+    "last_verified": null,
+    "tags": [
+      "python",
+      "advanced",
+      "internals"
+    ]
+  },
+  {
+    "id": "res_dsa_01",
+    "title": "MIT 6.006: Introduction to Algorithms",
+    "category": "DSA",
+    "skill_ids": [
+      "dsa"
+    ],
+    "description": "MIT OpenCourseWare course covering fundamental data structures, sorting, trees, hashing, and dynamic programming.",
+    "level": "Intermediate",
+    "cost": "free",
+    "type": "University Course",
+    "url": "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/",
+    "recommended_for": [
+      "software_engineer",
+      "ai_ml_engineer"
+    ],
+    "estimated_time_minutes": 480,
+    "difficulty": "medium",
+    "source_type": "university",
+    "language": "English",
+    "source": "MIT OpenCourseWare",
+    "last_verified": null,
+    "tags": [
+      "dsa",
+      "algorithms",
+      "mit"
+    ]
+  },
+  {
+    "id": "res_dsa_02",
+    "title": "LeetCode Curated Algorithm Patterns",
+    "category": "DSA",
+    "skill_ids": [
+      "dsa"
+    ],
+    "description": "Hands-on problem solving covering sliding window, two pointers, binary search, and graph traversal.",
+    "level": "Intermediate",
+    "cost": "free",
+    "type": "Practice Platform",
+    "url": "https://leetcode.com/explore/",
+    "recommended_for": [
+      "software_engineer",
+      "ai_ml_engineer"
+    ],
+    "estimated_time_minutes": 600,
+    "difficulty": "medium",
+    "source_type": "platform",
+    "language": "English",
+    "source": "LeetCode",
+    "last_verified": null,
+    "tags": [
+      "dsa",
+      "coding_interview",
+      "problems"
+    ]
+  },
+  {
+    "id": "res_dsa_03",
+    "title": "VisuAlgo: Visualizing Data Structures and Algorithms",
+    "category": "DSA",
+    "skill_ids": [
+      "dsa"
+    ],
+    "description": "Interactive visual animations of linked lists, binary heaps, AVL trees, graphs, and recursion.",
+    "level": "Beginner",
+    "cost": "free",
+    "type": "Interactive Tool",
+    "url": "https://visualgo.net/en",
+    "recommended_for": [
+      "software_engineer"
+    ],
+    "estimated_time_minutes": 120,
+    "difficulty": "easy",
+    "source_type": "community",
+    "language": "English",
+    "source": "National University of Singapore",
+    "last_verified": null,
+    "tags": [
+      "dsa",
+      "visualization",
+      "interactive"
+    ]
+  },
+  {
+    "id": "res_dsa_04",
+    "title": "GeeksforGeeks Complete DSA Preparation Track",
+    "category": "DSA",
+    "skill_ids": [
+      "dsa"
+    ],
+    "description": "Comprehensive topic-wise tutorials, code implementations in C++/Java/Python, and interview MCQs.",
+    "level": "Beginner",
+    "cost": "free",
+    "type": "Tutorial & Practice",
+    "url": "https://www.geeksforgeeks.org/data-structures/",
+    "recommended_for": [
+      "software_engineer"
+    ],
+    "estimated_time_minutes": 360,
+    "difficulty": "easy",
+    "source_type": "platform",
+    "language": "English",
+    "source": "GeeksforGeeks",
+    "last_verified": null,
+    "tags": [
+      "dsa",
+      "fundamentals",
+      "campus_prep"
+    ]
+  },
+  {
+    "id": "res_dsa_05",
+    "title": "CP-Algorithms: Competitive Programming & Advanced Data Structures",
+    "category": "DSA",
+    "skill_ids": [
+      "dsa"
+    ],
+    "description": "In-depth mathematical algorithms, segment trees, Fenwick trees, and advanced graph algorithms.",
+    "level": "Advanced",
+    "cost": "free",
+    "type": "Documentation",
+    "url": "https://cp-algorithms.com/",
+    "recommended_for": [
+      "software_engineer"
+    ],
+    "estimated_time_minutes": 400,
+    "difficulty": "hard",
+    "source_type": "community",
+    "language": "English",
+    "source": "E-Maxx Project",
+    "last_verified": null,
+    "tags": [
+      "dsa",
+      "advanced",
+      "competitive_programming"
+    ]
+  },
+  {
+    "id": "res_oop_01",
+    "title": "Object-Oriented Programming Principles & Best Practices",
+    "category": "OOP",
+    "skill_ids": [
+      "oop"
+    ],
+    "description": "Clear explanations of encapsulation, inheritance, polymorphism, and abstraction with diagrams.",
+    "level": "Beginner",
+    "cost": "free",
+    "type": "Tutorial",
+    "url": "https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object-oriented_programming",
+    "recommended_for": [
+      "software_engineer",
+      "fullstack_developer"
+    ],
+    "estimated_time_minutes": 120,
+    "difficulty": "easy",
+    "source_type": "official",
+    "language": "English",
+    "source": "MDN Web Docs",
+    "last_verified": null,
+    "tags": [
+      "oop",
+      "fundamentals",
+      "mdn"
+    ]
+  },
+  {
+    "id": "res_oop_02",
+    "title": "Refactoring Guru: Design Patterns and SOLID Principles",
+    "category": "OOP",
+    "skill_ids": [
+      "oop",
+      "system_design"
+    ],
+    "description": "Visual guide to Creational, Structural, and Behavioral design patterns with practical code examples.",
+    "level": "Intermediate",
+    "cost": "free",
+    "type": "Interactive Guide",
+    "url": "https://refactoring.guru/design-patterns",
+    "recommended_for": [
+      "software_engineer",
+      "fullstack_developer"
+    ],
+    "estimated_time_minutes": 240,
+    "difficulty": "medium",
+    "source_type": "platform",
+    "language": "English",
+    "source": "Refactoring Guru",
+    "last_verified": null,
+    "tags": [
+      "oop",
+      "solid",
+      "design_patterns"
+    ]
+  },
+  {
+    "id": "res_oop_03",
+    "title": "SourceMaking: Design Patterns and Anti-Patterns",
+    "category": "OOP",
+    "skill_ids": [
+      "oop"
+    ],
+    "description": "Architectural design patterns, refactoring steps, and common OOP anti-patterns.",
+    "level": "Intermediate",
+    "cost": "free",
+    "type": "Documentation",
+    "url": "https://sourcemaking.com/design_patterns",
+    "recommended_for": [
+      "software_engineer"
+    ],
+    "estimated_time_minutes": 180,
+    "difficulty": "medium",
+    "source_type": "community",
+    "language": "English",
+    "source": "SourceMaking",
+    "last_verified": null,
+    "tags": [
+      "oop",
+      "architecture"
+    ]
+  },
+  {
+    "id": "res_oop_04",
+    "title": "SOLID Principles Explained Simply",
+    "category": "OOP",
+    "skill_ids": [
+      "oop"
+    ],
+    "description": "Single responsibility, Open/Closed, Liskov substitution, Interface segregation, and Dependency inversion.",
+    "level": "Beginner",
+    "cost": "free",
+    "type": "Article",
+    "url": "https://www.freecodecamp.org/news/solid-principles-explained-in-plain-english/",
+    "recommended_for": [
+      "software_engineer",
+      "fullstack_developer"
+    ],
+    "estimated_time_minutes": 90,
+    "difficulty": "easy",
+    "source_type": "community",
+    "language": "English",
+    "source": "freeCodeCamp",
+    "last_verified": null,
+    "tags": [
+      "oop",
+      "solid",
+      "interview"
+    ]
+  },
+  {
+    "id": "res_oop_05",
+    "title": "Clean Code Architecture Concepts",
+    "category": "OOP",
+    "skill_ids": [
+      "oop",
+      "system_design"
+    ],
+    "description": "Principles of writing maintainable, readable, and testable object-oriented software.",
+    "level": "Advanced",
+    "cost": "freemium",
+    "type": "Article / Book",
+    "url": "https://blog.cleancoder.com/",
+    "recommended_for": [
+      "software_engineer"
+    ],
+    "estimated_time_minutes": 200,
+    "difficulty": "hard",
+    "source_type": "community",
+    "language": "English",
+    "source": "Robert C. Martin",
+    "last_verified": null,
+    "tags": [
+      "oop",
+      "clean_code",
+      "best_practices"
+    ]
+  },
+  {
+    "id": "res_db_01",
+    "title": "PostgreSQL Official Tutorial & Documentation",
+    "category": "DBMS",
+    "skill_ids": [
+      "dbms",
+      "sql"
+    ],
+    "description": "Complete guide to relational databases, transactions, indexing, JSON types, and SQL standard queries.",
+    "level": "Beginner",
+    "cost": "free",
+    "type": "Documentation",
+    "url": "https://www.postgresql.org/docs/current/tutorial.html",
+    "recommended_for": [
+      "software_engineer",
+      "data_scientist",
+      "fullstack_developer"
+    ],
+    "estimated_time_minutes": 240,
+    "difficulty": "easy",
+    "source_type": "official",
+    "language": "English",
+    "source": "PostgreSQL Global Development Group",
+    "last_verified": null,
+    "tags": [
+      "dbms",
+      "sql",
+      "postgresql"
+    ]
+  },
+  {
+    "id": "res_db_02",
+    "title": "SQLBolt: Interactive SQL Lessons & Practice",
+    "category": "DBMS",
+    "skill_ids": [
+      "dbms",
+      "sql"
+    ],
+    "description": "Interactive in-browser SQL queries covering SELECT, joins, aggregations, schema creation, and updates.",
+    "level": "Beginner",
+    "cost": "free",
+    "type": "Interactive Course",
+    "url": "https://sqlbolt.com/",
+    "recommended_for": [
+      "data_scientist",
+      "software_engineer"
+    ],
+    "estimated_time_minutes": 120,
+    "difficulty": "easy",
+    "source_type": "platform",
+    "language": "English",
+    "source": "SQLBolt",
+    "last_verified": null,
+    "tags": [
+      "sql",
+      "interactive",
+      "practice"
+    ]
+  },
+  {
+    "id": "res_db_03",
+    "title": "Use The Index, Luke: A Guide to Database Performance",
+    "category": "DBMS",
+    "skill_ids": [
+      "dbms",
+      "sql"
+    ],
+    "description": "Essential indexing strategies, B-tree mechanics, query execution plans, and performance optimization.",
+    "level": "Intermediate",
+    "cost": "free",
+    "type": "Documentation / Guide",
+    "url": "https://use-the-index-luke.com/",
+    "recommended_for": [
+      "software_engineer",
+      "fullstack_developer"
+    ],
+    "estimated_time_minutes": 210,
+    "difficulty": "medium",
+    "source_type": "community",
+    "language": "English",
+    "source": "Markus Winand",
+    "last_verified": null,
+    "tags": [
+      "indexing",
+      "dbms",
+      "performance"
+    ]
+  },
+  {
+    "id": "res_db_04",
+    "title": "CMU 15-445/645: Database Systems",
+    "category": "DBMS",
+    "skill_ids": [
+      "dbms"
+    ],
+    "description": "Carnegie Mellon University internal database architecture: buffer pools, concurrency control, B+ trees.",
+    "level": "Advanced",
+    "cost": "free",
+    "type": "University Course",
+    "url": "https://15445.courses.cs.cmu.edu/",
+    "recommended_for": [
+      "software_engineer"
+    ],
+    "estimated_time_minutes": 480,
+    "difficulty": "hard",
+    "source_type": "university",
+    "language": "English",
+    "source": "Carnegie Mellon University",
+    "last_verified": null,
+    "tags": [
+      "dbms",
+      "internals",
+      "cmu"
+    ]
+  },
+  {
+    "id": "res_db_05",
+    "title": "Mode Analytics SQL Tutorial for Data Analysis",
+    "category": "DBMS",
+    "skill_ids": [
+      "sql"
+    ],
+    "description": "Intermediate and advanced SQL for analytics: window functions, subqueries, and CTEs.",
+    "level": "Intermediate",
+    "cost": "free",
+    "type": "Tutorial",
+    "url": "https://mode.com/sql-tutorial/",
+    "recommended_for": [
+      "data_scientist"
+    ],
+    "estimated_time_minutes": 180,
+    "difficulty": "medium",
+    "source_type": "platform",
+    "language": "English",
+    "source": "Mode Analytics",
+    "last_verified": null,
+    "tags": [
+      "sql",
+      "analytics",
+      "window_functions"
+    ]
+  },
+  {
+    "id": "res_os_01",
+    "title": "Operating Systems: Three Easy Pieces (OSTEP)",
+    "category": "OS",
+    "skill_ids": [
+      "os"
+    ],
+    "description": "Freely available textbook covering Virtualization (CPU & memory), Concurrency (threads, locks), and Persistence (file systems).",
+    "level": "Intermediate",
+    "cost": "free",
+    "type": "Book",
+    "url": "https://pages.cs.wisc.edu/~remzi/OSTEP/",
+    "recommended_for": [
+      "software_engineer",
+      "cloud_devops_engineer"
+    ],
+    "estimated_time_minutes": 420,
+    "difficulty": "medium",
+    "source_type": "university",
+    "language": "English",
+    "source": "University of Wisconsin-Madison",
+    "last_verified": null,
+    "tags": [
+      "os",
+      "concurrency",
+      "ostep"
+    ]
+  },
+  {
+    "id": "res_os_02",
+    "title": "Linux Journey: Learn Linux from Scratch",
+    "category": "OS",
+    "skill_ids": [
+      "os"
+    ],
+    "description": "Interactive lessons on Linux commands, file systems, permissions, processes, and kernel basics.",
+    "level": "Beginner",
+    "cost": "free",
+    "type": "Tutorial",
+    "url": "https://linuxjourney.com/",
+    "recommended_for": [
+      "cloud_devops_engineer",
+      "cybersecurity_analyst"
+    ],
+    "estimated_time_minutes": 150,
+    "difficulty": "easy",
+    "source_type": "community",
+    "language": "English",
+    "source": "Linux Journey",
+    "last_verified": null,
+    "tags": [
+      "linux",
+      "os",
+      "devops"
+    ]
+  },
+  {
+    "id": "res_net_01",
+    "title": "Computer Networking: A Top-Down Approach Companion",
+    "category": "Networks",
+    "skill_ids": [
+      "networks"
+    ],
+    "description": "Kurose & Ross companion resources covering application layer (HTTP/DNS), transport layer (TCP/UDP), and network routing.",
+    "level": "Intermediate",
+    "cost": "free",
+    "type": "University Companion",
+    "url": "https://gaia.cs.umass.edu/kurose_ross/",
+    "recommended_for": [
+      "software_engineer",
+      "cybersecurity_analyst"
+    ],
+    "estimated_time_minutes": 300,
+    "difficulty": "medium",
+    "source_type": "university",
+    "language": "English",
+    "source": "UMass Amherst",
+    "last_verified": null,
+    "tags": [
+      "networks",
+      "tcp_ip",
+      "http"
+    ]
+  },
+  {
+    "id": "res_net_02",
+    "title": "Cloudflare Learning Center: Networking Fundamentals",
+    "category": "Networks",
+    "skill_ids": [
+      "networks"
+    ],
+    "description": "Clear, high-quality visual explanations of DNS, CDN, DDoS, SSL/TLS, and modern web protocols.",
+    "level": "Beginner",
+    "cost": "free",
+    "type": "Documentation",
+    "url": "https://www.cloudflare.com/learning/",
+    "recommended_for": [
+      "software_engineer",
+      "cloud_devops_engineer",
+      "cybersecurity_analyst"
+    ],
+    "estimated_time_minutes": 120,
+    "difficulty": "easy",
+    "source_type": "official",
+    "language": "English",
+    "source": "Cloudflare",
+    "last_verified": null,
+    "tags": [
+      "networking",
+      "dns",
+      "security"
+    ]
+  },
+  {
+    "id": "res_sys_01",
+    "title": "The System Design Primer",
+    "category": "System Design",
+    "skill_ids": [
+      "system_design",
+      "dbms",
+      "networks"
+    ],
+    "description": "Open-source guide on preparing for system design interviews: caching, CDN, sharding, message queues.",
+    "level": "Intermediate",
+    "cost": "free",
+    "type": "GitHub Guide",
+    "url": "https://github.com/donnemartin/system-design-primer",
+    "recommended_for": [
+      "software_engineer",
+      "fullstack_developer"
+    ],
+    "estimated_time_minutes": 360,
+    "difficulty": "medium",
+    "source_type": "community",
+    "language": "English",
+    "source": "Donne Martin",
+    "last_verified": null,
+    "tags": [
+      "system_design",
+      "scalability",
+      "architecture"
+    ]
+  },
+  {
+    "id": "res_ml_01",
+    "title": "Scikit-Learn Machine Learning in Python",
+    "category": "AI/ML",
+    "skill_ids": [
+      "machine_learning",
+      "data_analysis"
+    ],
+    "description": "Official documentation, mathematical explanations, and API tutorials for classification and regression.",
+    "level": "Beginner",
+    "cost": "free",
+    "type": "Documentation",
+    "url": "https://scikit-learn.org/stable/user_guide.html",
+    "recommended_for": [
+      "data_scientist",
+      "ai_ml_engineer"
+    ],
+    "estimated_time_minutes": 240,
+    "difficulty": "easy",
+    "source_type": "official",
+    "language": "English",
+    "source": "Scikit-Learn Consortium",
+    "last_verified": null,
+    "tags": [
+      "ml",
+      "scikit_learn",
+      "python"
+    ]
+  },
+  {
+    "id": "res_ml_02",
+    "title": "Fast.ai: Practical Deep Learning for Coders",
+    "category": "AI/ML",
+    "skill_ids": [
+      "deep_learning",
+      "machine_learning"
+    ],
+    "description": "Top-down hands-on course covering PyTorch, computer vision, NLP, and tabular deep learning models.",
+    "level": "Intermediate",
+    "cost": "free",
+    "type": "Course",
+    "url": "https://course.fast.ai/",
+    "recommended_for": [
+      "ai_ml_engineer"
+    ],
+    "estimated_time_minutes": 600,
+    "difficulty": "medium",
+    "source_type": "university",
+    "language": "English",
+    "source": "fast.ai",
+    "last_verified": null,
+    "tags": [
+      "deep_learning",
+      "pytorch",
+      "ai"
+    ]
+  },
+  {
+    "id": "res_ml_03",
+    "title": "PyTorch Official Deep Learning Tutorials",
+    "category": "AI/ML",
+    "skill_ids": [
+      "deep_learning"
+    ],
+    "description": "Tensors, autograd, building neural network architectures, custom datasets, and GPU acceleration.",
+    "level": "Intermediate",
+    "cost": "free",
+    "type": "Documentation",
+    "url": "https://pytorch.org/tutorials/",
+    "recommended_for": [
+      "ai_ml_engineer"
+    ],
+    "estimated_time_minutes": 300,
+    "difficulty": "medium",
+    "source_type": "official",
+    "language": "English",
+    "source": "Linux Foundation / PyTorch",
+    "last_verified": null,
+    "tags": [
+      "pytorch",
+      "tensors",
+      "deep_learning"
+    ]
+  },
+  {
+    "id": "res_ml_04",
+    "title": "Hugging Face NLP & Transformers Course",
+    "category": "AI/ML",
+    "skill_ids": [
+      "deep_learning"
+    ],
+    "description": "Hands-on guide to Transformers, Tokenizers, Large Language Models, and fine-tuning pipelines.",
+    "level": "Advanced",
+    "cost": "free",
+    "type": "Course",
+    "url": "https://huggingface.co/learn/nlp-course/",
+    "recommended_for": [
+      "ai_ml_engineer"
+    ],
+    "estimated_time_minutes": 360,
+    "difficulty": "hard",
+    "source_type": "platform",
+    "language": "English",
+    "source": "Hugging Face",
+    "last_verified": null,
+    "tags": [
+      "transformers",
+      "nlp",
+      "llms"
+    ]
+  },
+  {
+    "id": "res_ml_05",
+    "title": "Stanford CS229: Machine Learning Lecture Notes",
+    "category": "AI/ML",
+    "skill_ids": [
+      "machine_learning",
+      "statistics"
+    ],
+    "description": "Rigorous mathematical derivations of linear models, SVMs, kernel methods, EM algorithm, and PCA.",
+    "level": "Advanced",
+    "cost": "free",
+    "type": "University Course Notes",
+    "url": "https://cs229.stanford.edu/",
+    "recommended_for": [
+      "ai_ml_engineer",
+      "data_scientist"
+    ],
+    "estimated_time_minutes": 480,
+    "difficulty": "hard",
+    "source_type": "university",
+    "language": "English",
+    "source": "Stanford University",
+    "last_verified": null,
+    "tags": [
+      "ml",
+      "math",
+      "stanford"
+    ]
+  },
+  {
+    "id": "res_cld_01",
+    "title": "Docker Documentation & Getting Started Guide",
+    "category": "Cloud/DevOps",
+    "skill_ids": [
+      "devops"
+    ],
+    "description": "Container fundamentals, writing Dockerfiles, multi-stage builds, and Docker Compose networking.",
+    "level": "Beginner",
+    "cost": "free",
+    "type": "Documentation",
+    "url": "https://docs.docker.com/get-started/",
+    "recommended_for": [
+      "cloud_devops_engineer",
+      "software_engineer"
+    ],
+    "estimated_time_minutes": 150,
+    "difficulty": "easy",
+    "source_type": "official",
+    "language": "English",
+    "source": "Docker Inc.",
+    "last_verified": null,
+    "tags": [
+      "docker",
+      "containers",
+      "devops"
+    ]
+  },
+  {
+    "id": "res_cld_02",
+    "title": "Kubernetes Official Documentation & Interactive Tutorials",
+    "category": "Cloud/DevOps",
+    "skill_ids": [
+      "devops",
+      "cloud"
+    ],
+    "description": "Pods, Deployments, Services, Ingress, and cluster orchestration concepts.",
+    "level": "Intermediate",
+    "cost": "free",
+    "type": "Documentation",
+    "url": "https://kubernetes.io/docs/tutorials/",
+    "recommended_for": [
+      "cloud_devops_engineer"
+    ],
+    "estimated_time_minutes": 300,
+    "difficulty": "medium",
+    "source_type": "official",
+    "language": "English",
+    "source": "Cloud Native Computing Foundation",
+    "last_verified": null,
+    "tags": [
+      "kubernetes",
+      "k8s",
+      "cloud"
+    ]
+  },
+  {
+    "id": "res_cld_03",
+    "title": "AWS Skill Builder Cloud Essentials",
+    "category": "Cloud/DevOps",
+    "skill_ids": [
+      "cloud"
+    ],
+    "description": "Official Amazon Web Services training covering core compute, storage, databases, and IAM security.",
+    "level": "Beginner",
+    "cost": "free",
+    "type": "Course",
+    "url": "https://aws.amazon.com/training/",
+    "recommended_for": [
+      "cloud_devops_engineer"
+    ],
+    "estimated_time_minutes": 240,
+    "difficulty": "easy",
+    "source_type": "official",
+    "language": "English",
+    "source": "Amazon Web Services",
+    "last_verified": null,
+    "tags": [
+      "aws",
+      "cloud",
+      "iam"
+    ]
+  },
+  {
+    "id": "res_cpp_01",
+    "title": "LearnCpp.com Comprehensive C++ Tutorial",
+    "category": "C++",
+    "skill_ids": [
+      "cpp"
+    ],
+    "description": "Free, comprehensive, modern C++ tutorials from syntax basics to object-oriented programming and memory management.",
+    "level": "Beginner",
+    "cost": "free",
+    "type": "Tutorial",
+    "url": "https://www.learncpp.com/",
+    "recommended_for": [
+      "software_engineer",
+      "embedded_iot_engineer"
+    ],
+    "estimated_time_minutes": 360,
+    "difficulty": "medium",
+    "source_type": "platform",
+    "language": "English",
+    "source": "LearnCpp",
+    "last_verified": null,
+    "tags": [
+      "cpp",
+      "c++",
+      "basics",
+      "memory"
+    ]
+  },
+  {
+    "id": "res_cpp_02",
+    "title": "cppreference.com C++ Standard Library Reference",
+    "category": "C++",
+    "skill_ids": [
+      "cpp"
+    ],
+    "description": "The definitive online reference manual for standard C++ language features, containers, algorithms, and headers.",
+    "level": "Intermediate",
+    "cost": "free",
+    "type": "Documentation",
+    "url": "https://en.cppreference.com/w/",
+    "recommended_for": [
+      "software_engineer",
+      "embedded_iot_engineer"
+    ],
+    "estimated_time_minutes": 200,
+    "difficulty": "medium",
+    "source_type": "official",
+    "language": "English",
+    "source": "cppreference",
+    "last_verified": null,
+    "tags": [
+      "cpp",
+      "stl",
+      "reference"
+    ]
+  },
+  {
+    "id": "res_js_01",
+    "title": "MDN Web Docs: JavaScript Guide",
+    "category": "JavaScript",
+    "skill_ids": [
+      "javascript"
+    ],
+    "description": "Mozilla Developer Network's official guide to modern JavaScript syntax, closures, event loop, and asynchronous programming.",
+    "level": "Beginner",
+    "cost": "free",
+    "type": "Documentation",
+    "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide",
+    "recommended_for": [
+      "fullstack_developer"
+    ],
+    "estimated_time_minutes": 300,
+    "difficulty": "easy",
+    "source_type": "official",
+    "language": "English",
+    "source": "Mozilla",
+    "last_verified": null,
+    "tags": [
+      "javascript",
+      "js",
+      "web",
+      "frontend"
+    ]
+  },
+  {
+    "id": "res_js_02",
+    "title": "The Modern JavaScript Tutorial (javascript.info)",
+    "category": "JavaScript",
+    "skill_ids": [
+      "javascript"
+    ],
+    "description": "In-depth guide covering from the language basics to advanced topics like prototypes, promises, and async/await.",
+    "level": "Intermediate",
+    "cost": "free",
+    "type": "Tutorial",
+    "url": "https://javascript.info/",
+    "recommended_for": [
+      "fullstack_developer"
+    ],
+    "estimated_time_minutes": 240,
+    "difficulty": "medium",
+    "source_type": "platform",
+    "language": "English",
+    "source": "javascript.info",
+    "last_verified": null,
+    "tags": [
+      "javascript",
+      "es6",
+      "async"
+    ]
+  },
+  {
+    "id": "res_web_01",
+    "title": "MDN Web Docs: Getting Started with the Web",
+    "category": "Web",
+    "skill_ids": [
+      "web_basics"
+    ],
+    "description": "Practical introduction to HTML, CSS, DOM APIs, and HTTP request lifecycles for aspiring full-stack engineers.",
+    "level": "Beginner",
+    "cost": "free",
+    "type": "Documentation",
+    "url": "https://developer.mozilla.org/en-US/docs/Learn",
+    "recommended_for": [
+      "fullstack_developer"
+    ],
+    "estimated_time_minutes": 180,
+    "difficulty": "easy",
+    "source_type": "official",
+    "language": "English",
+    "source": "Mozilla",
+    "last_verified": null,
+    "tags": [
+      "web",
+      "html",
+      "css",
+      "dom"
+    ]
+  },
+  {
+    "id": "res_emb_01",
+    "title": "Raspberry Pi Documentation & Microcontroller Guide",
+    "category": "Embedded/IoT",
+    "skill_ids": [
+      "embedded_systems",
+      "cpp"
+    ],
+    "description": "Hardware architecture, GPIO programming, and embedded peripheral interfacing documentation.",
+    "level": "Beginner",
+    "cost": "free",
+    "type": "Documentation",
+    "url": "https://www.raspberrypi.com/documentation/",
+    "recommended_for": [
+      "embedded_iot_engineer"
+    ],
+    "estimated_time_minutes": 240,
+    "difficulty": "medium",
+    "source_type": "official",
+    "language": "English",
+    "source": "Raspberry Pi Foundation",
+    "last_verified": null,
+    "tags": [
+      "embedded",
+      "iot",
+      "hardware",
+      "gpio"
+    ]
+  },
+  {
+    "id": "res_emb_02",
+    "title": "Arm Developer Embedded Architecture & Firmware Docs",
+    "category": "Embedded/IoT",
+    "skill_ids": [
+      "embedded_systems",
+      "os"
+    ],
+    "description": "Official guides to Cortex-M microcontroller architectures, memory models, interrupts, and RTOS principles.",
+    "level": "Intermediate",
+    "cost": "free",
+    "type": "Documentation",
+    "url": "https://developer.arm.com/",
+    "recommended_for": [
+      "embedded_iot_engineer"
+    ],
+    "estimated_time_minutes": 300,
+    "difficulty": "hard",
+    "source_type": "official",
+    "language": "English",
+    "source": "Arm Ltd",
+    "last_verified": null,
+    "tags": [
+      "arm",
+      "cortex",
+      "rtos",
+      "firmware"
+    ]
+  },
+  {
+    "id": "res_sec_01",
+    "title": "OWASP Top Ten Web Application Security Risks",
+    "category": "Cybersecurity",
+    "skill_ids": [
+      "cybersecurity"
+    ],
+    "description": "The standard awareness document for developers and web application security representing consensus on critical vulnerabilities.",
+    "level": "Intermediate",
+    "cost": "free",
+    "type": "Documentation",
+    "url": "https://owasp.org/www-project-top-ten/",
+    "recommended_for": [
+      "cybersecurity_analyst",
+      "fullstack_developer"
+    ],
+    "estimated_time_minutes": 180,
+    "difficulty": "medium",
+    "source_type": "official",
+    "language": "English",
+    "source": "OWASP Foundation",
+    "last_verified": null,
+    "tags": [
+      "cybersecurity",
+      "owasp",
+      "web-security"
+    ]
+  },
+  {
+    "id": "res_sec_02",
+    "title": "PortSwigger Web Security Academy",
+    "category": "Cybersecurity",
+    "skill_ids": [
+      "cybersecurity",
+      "networks"
+    ],
+    "description": "Free, interactive online training on web application security, SQL injection, XSS, and CSRF with hands-on labs.",
+    "level": "Intermediate",
+    "cost": "free",
+    "type": "Practice Platform",
+    "url": "https://portswigger.net/web-security",
+    "recommended_for": [
+      "cybersecurity_analyst"
+    ],
+    "estimated_time_minutes": 360,
+    "difficulty": "hard",
+    "source_type": "platform",
+    "language": "English",
+    "source": "PortSwigger",
+    "last_verified": null,
+    "tags": [
+      "security",
+      "penetration-testing",
+      "labs"
+    ]
+  }
+]

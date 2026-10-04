@@ -1,0 +1,222 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Technical Interview | Question {{ question_number }} of {{ total_questions }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <!-- Navigation Header -->
+  <header class="app-header">
+    <div class="container header-content">
+      <a href="/" class="brand-logo">
+        <div class="brand-icon-wrap">
+          <div class="brand-icon">🤖</div>
+          <span class="brand-pulse"></span>
+        </div>
+        <div>
+          <div class="brand-title">AI Interview Preparation Agent</div>
+          <div class="brand-tagline">
+            <span>Mock Technical Interview Session in Progress</span>
+          </div>
+        </div>
+      </a>
+      <div class="header-badges">
+        <span class="live-indicator">👤 {{ student_name }}</span>
+        <a href="/reset" class="btn btn-secondary" style="padding: 6px 14px; font-size: 0.78rem;">
+          Quit & Restart
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content" style="flex: 1; padding: 28px 0 60px;">
+    <div class="container">
+
+      <!-- AI Agent Circuit Ribbon -->
+      <div class="agent-circuit-banner">
+        <div class="circuit-header">
+          <span class="circuit-label">🧠 Autonomous Agent State</span>
+          <span style="font-size: 0.72rem; color: var(--accent-cyan); font-family: 'JetBrains Mono', monospace;">
+            ACTIVE CYCLE: QUESTION {{ question_number }} OF {{ total_questions }}
+          </span>
+        </div>
+        <div class="circuit-track">
+          <div class="node-chip active">
+            <span>👁️</span> <strong>OBSERVE:</strong> Awaiting Candidate Input
+          </div>
+          <span class="node-arrow">➔</span>
+          <div class="node-chip">
+            <span>🔍</span> <strong>ANALYZE:</strong> Technical Evaluation
+          </div>
+          <span class="node-arrow">➔</span>
+          <div class="node-chip">
+            <span>⚙️</span> <strong>DECIDE:</strong> Calibrate Difficulty
+          </div>
+          <span class="node-arrow">➔</span>
+          <div class="node-chip">
+            <span>⚡</span> <strong>ACT:</strong> Next Question Focus
+          </div>
+          <span class="node-arrow">➔</span>
+          <div class="node-chip">
+            <span>🔄</span> <strong>ADAPT:</strong> Progress Loop
+          </div>
+        </div>
+      </div>
+
+      <!-- Flash Messages -->
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category if category != 'error' else 'warning' }}">
+              <span>⚠️ {{ message }}</span>
+            </div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      <!-- Cockpit HUD Grid -->
+      <div class="cockpit-hud">
+        <div class="hud-tile">
+          <div class="hud-icon">📋</div>
+          <div class="hud-data">
+            <span class="hud-label">Progress</span>
+            <span class="hud-value">{{ question_number }} / {{ total_questions }}</span>
+          </div>
+        </div>
+
+        <div class="hud-tile">
+          <div class="hud-icon">⚡</div>
+          <div class="hud-data">
+            <span class="hud-label">Difficulty</span>
+            <div>
+              <span class="difficulty-pill {{ difficulty|lower }}">{{ difficulty|capitalize }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hud-tile">
+          <div class="hud-icon">⏱️</div>
+          <div class="hud-data">
+            <span class="hud-label">Elapsed Time</span>
+            <span class="hud-value" id="hud-timer">00:00</span>
+          </div>
+        </div>
+
+        <div class="hud-tile">
+          <div class="hud-icon">🎯</div>
+          <div class="hud-data">
+            <span class="hud-label">Target Focus</span>
+            <span class="hud-value" style="font-size: 0.95rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 140px;">
+              {{ identified_weak_area or "Core Concepts" }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Glowing Progress Bar -->
+      <div class="progress-wrap">
+        <div class="progress-header">
+          <span>INTERVIEW PROGRESS</span>
+          <span>{{ progress_percent }}% COMPLETED</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" style="width: {{ progress_percent }}%;"></div>
+        </div>
+      </div>
+
+      <!-- Main Question Cockpit Card -->
+      <div class="card" style="padding: 32px;">
+
+        <!-- Question Card Outer -->
+        <div class="question-card-outer">
+          <div class="question-top-bar">
+            <span class="question-seq-badge">TECHNICAL INTERVIEW QUESTION {{ question_number }}</span>
+            <span class="difficulty-pill {{ difficulty|lower }}">{{ difficulty|capitalize }}</span>
+          </div>
+
+          <div class="question-main-text" id="current-question-text">
+            {{ current_question }}
+          </div>
+
+          <div class="question-action-bar">
+            <button type="button" class="btn-tool" onclick="playQuestionTTS(document.getElementById('current-question-text').innerText, this)">
+              🔊 Listen to Question
+            </button>
+            <span style="font-size: 0.78rem; color: var(--text-dim); margin-left: 6px;">
+              Target Role: <strong>{{ job_role }}</strong>
+            </span>
+          </div>
+        </div>
+
+        <!-- Student Answer Form -->
+        <form action="/evaluate" method="POST" id="interview-form">
+
+          <!-- Answer Toolbar -->
+          <div class="answer-toolbar">
+            <div style="display: flex; gap: 8px;">
+              <button type="button" class="btn-tool" onclick="toggleVoiceDictation('answer', this)">
+                🎙️ Voice Dictation
+              </button>
+              <button type="button" class="btn-tool" onclick="toggleCodeMode('answer', this)">
+                { } Code Mode
+              </button>
+            </div>
+
+            <div class="stats-counter">
+              <span>Words: <strong id="word-count-val" style="color: #fff;">0</strong></span>
+              <span>Chars: <strong id="char-count-val" style="color: #fff;">0</strong></span>
+              <span id="answer-depth-status">Awaiting response</span>
+            </div>
+          </div>
+
+          <!-- Answer Textarea -->
+          <div class="form-group">
+            <textarea
+              id="answer"
+              name="answer"
+              class="form-control"
+              placeholder="Type your technical answer here... Explain fundamental concepts, mechanics, syntax examples, and practical trade-offs. (Tip: Press Ctrl + Enter to submit)"
+              required
+              autofocus
+              oninput="updateWordMetrics('answer')"
+            ></textarea>
+            <span class="form-hint" style="margin-top: 4px;">
+              💡 <strong>Pro Tip:</strong> Structure your answer with clear definitions, how it works internally, and a practical example.
+            </span>
+          </div>
+
+          <!-- Action Buttons -->
+          <div style="margin-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
+            <span style="font-size: 0.78rem; color: var(--text-dim); font-family: 'JetBrains Mono', monospace;">
+              Press [Ctrl + Enter] to Submit Answer
+            </span>
+            <button type="submit" class="btn btn-primary btn-lg">
+              Submit Answer for Evaluation 🚀
+            </button>
+          </div>
+        </form>
+
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="app-footer">
+    <div class="container">
+      <p>Fundamentals of Artificial Intelligence (FAI) College Project • Adaptive AI Agent powered by Google Gemini</p>
+    </div>
+  </footer>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      startLiveTimer("hud-timer");
+      enableTabKey("answer");
+      updateWordMetrics("answer");
+    });
+  </script>
+</body>
+</html>

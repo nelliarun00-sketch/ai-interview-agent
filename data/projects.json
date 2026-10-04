@@ -1,0 +1,119 @@
+[
+  {
+    "id": "proj_01",
+    "title": "High-Throughput Key-Value Store with Sharding",
+    "career_ids": [
+      "software_engineer",
+      "fullstack_developer"
+    ],
+    "difficulty": "Medium",
+    "skills": [
+      "python",
+      "dsa",
+      "networks",
+      "system_design"
+    ],
+    "estimated_time_hours": 25,
+    "technologies": [
+      "Python",
+      "Sockets",
+      "Hashing",
+      "Threading"
+    ],
+    "expected_output": "In-memory distributed key-value store with consistent hashing and write-ahead log replication.",
+    "resume_value": "Demonstrates concurrency, network protocol design, and distributed systems fundamentals.",
+    "milestones": [
+      "Implement single-threaded in-memory map with eviction policies (LRU)",
+      "Add TCP socket server with multi-threaded request dispatcher",
+      "Implement Write-Ahead Log (WAL) for persistent recovery",
+      "Simulate consistent hashing across 3 virtual nodes"
+    ]
+  },
+  {
+    "id": "proj_02",
+    "title": "End-to-End Customer Churn Prediction Pipeline",
+    "career_ids": [
+      "data_scientist",
+      "ai_ml_engineer"
+    ],
+    "difficulty": "Medium",
+    "skills": [
+      "python",
+      "data_analysis",
+      "statistics",
+      "machine_learning"
+    ],
+    "estimated_time_hours": 20,
+    "technologies": [
+      "Pandas",
+      "Scikit-Learn",
+      "FastAPI",
+      "Matplotlib"
+    ],
+    "expected_output": "Production-ready ML model with feature engineering pipeline, evaluated against ROC-AUC and deployed as REST endpoint.",
+    "resume_value": "Highlights exploratory data analysis, cross-validation, hyperparameter tuning, and API serving.",
+    "milestones": [
+      "Clean raw tabular dataset and perform exploratory data analysis",
+      "Engineer categorical embeddings and normalized numerical features",
+      "Train and compare Logistic Regression, Random Forest, and XGBoost",
+      "Deploy inference API with FastAPI accepting candidate feature inputs"
+    ]
+  },
+  {
+    "id": "proj_03",
+    "title": "Containerized Microservices CI/CD Pipeline on Kubernetes",
+    "career_ids": [
+      "cloud_devops_engineer",
+      "software_engineer"
+    ],
+    "difficulty": "Hard",
+    "skills": [
+      "devops",
+      "cloud",
+      "os"
+    ],
+    "estimated_time_hours": 30,
+    "technologies": [
+      "Docker",
+      "Kubernetes",
+      "GitHub Actions",
+      "Prometheus"
+    ],
+    "expected_output": "Automated GitHub Actions CI/CD pipeline deploying microservices to Minikube with health probes and metrics.",
+    "resume_value": "Proves modern DevOps competencies: container orchestration, declarative infrastructure, and monitoring.",
+    "milestones": [
+      "Containerize frontend and backend services with multi-stage Dockerfiles",
+      "Write Kubernetes manifests (Deployments, Services, ConfigMaps)",
+      "Build automated linting and testing workflow in GitHub Actions",
+      "Configure Prometheus metrics scraping and Grafana dashboard"
+    ]
+  },
+  {
+    "id": "proj_04",
+    "title": "Real-Time IoT Environmental Monitoring System",
+    "career_ids": [
+      "embedded_iot_engineer"
+    ],
+    "difficulty": "Medium",
+    "skills": [
+      "cpp",
+      "embedded_systems",
+      "networks"
+    ],
+    "estimated_time_hours": 25,
+    "technologies": [
+      "C++",
+      "FreeRTOS",
+      "MQTT",
+      "ESP32"
+    ],
+    "expected_output": "Firmware reading sensor telemetry over I2C, publishing to MQTT broker with deep-sleep power management.",
+    "resume_value": "Demonstrates RTOS task synchronization, hardware communication protocols, and low-power IoT constraints.",
+    "milestones": [
+      "Configure GPIO and I2C driver for temperature/humidity sensor",
+      "Create FreeRTOS tasks with queues and mutex locks",
+      "Connect to Wi-Fi and publish telemetry packets via MQTT",
+      "Implement deep sleep timer for power consumption optimization"
+    ]
+  }
+]
