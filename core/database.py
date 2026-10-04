@@ -531,11 +531,13 @@ def seed_demo_accounts():
     ]
 
     for d in demo_users:
-        existing = get_user_by_email(d["email"])
-        if not existing:
-            # Create user
+        try:
             with get_db() as conn:
                 cursor = conn.cursor()
+                cursor.execute("SELECT id FROM users WHERE email = ?", (d["email"].strip().lower(),))
+                if cursor.fetchone():
+                    continue
+
                 now = datetime.now(timezone.utc).isoformat()
                 cursor.execute(
                     "INSERT INTO users (email, password_hash, full_name, created_at) VALUES (?, ?, ?, ?)",
@@ -547,7 +549,6 @@ def seed_demo_accounts():
             # Build mock interviews
             interviews = []
             for i in range(d["interviews_count"]):
-                # Progressive score up to avg
                 step_score = round(min(10.0, d["avg_score"] - 1.5 + (i * 0.3)), 1)
                 interviews.append({
                     "id": f"inv_{user_id}_{i+1}",
@@ -599,3 +600,7 @@ def seed_demo_accounts():
 
             save_student_state_by_user_id(user_id, student)
             print(f"Seeded demo student account: {d['email']} (ID: {user_id})")
+        except sqlite3.IntegrityError:
+            # Concurrently seeded by another worker process
+            continue
+
